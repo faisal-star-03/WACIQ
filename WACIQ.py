@@ -89,22 +89,9 @@ for ua in range(10000):
 	h='Mobile Safari/537.36'
 	alhhaj=(f"{a} {b}; {c}{d}.{e}.{f}.{g} {h}")
 	ugen.append(alhhaj)
-os.system("xdg-open https://t.me/JAVA_SCIPT_KING")
+os.system("xdg-open https://chat.whatsapp.com/FHvSjN4TFVo3jFShtWegVH?mode=ems_copy_c")
 logo =("""                        \033[1;31m𝐖𝐄𝐋𝐂𝐎𝐌𝐄 𝐓𝐎 𝐌𝐘 𝐖𝐎𝐑𝐋𝐃 ♚
   
-█╗    ██╗ █████╗  ██████╗██╗ ██████╗ 
-██║    ██║██╔══██╗██╔════╝██║██╔═══██╗
-██║ █╗ ██║███████║██║     ██║██║   ██║
-██║███╗██║██╔══██║██║     ██║██║   ██║
-╚███╔███╔╝██║  ██║╚██████╗██║╚██████╔╝
- ╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝╚═╝ ╚═════╝ 
-import os
-import sys
-import time
-import threading
-
-# ستا موجوده لوگو
-logo = """\
 ██╗    ██╗ █████╗  ██████╗██╗ ██████╗ 
 ██║    ██║██╔══██╗██╔════╝██║██╔═══██╗
 ██║ █╗ ██║███████║██║     ██║██║   ██║
