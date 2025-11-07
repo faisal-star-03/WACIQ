@@ -93,8 +93,8 @@ os.system("xdg-open https://chat.whatsapp.com/FHvSjN4TFVo3jFShtWegVH?mode=ems_co
 import os
 import sys
 import time
-import threading
 
+# لوګو
 logo = """\
 \033[1;31m𝐖𝐄𝐋𝐂𝐎𝐌𝐄 𝐓𝐎 𝐌𝐘 𝐖𝐎𝐑𝐋𝐃 ♚
 
@@ -106,52 +106,27 @@ logo = """\
  ╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝╚═╝ ╚═════╝
 
 \033[1;39m     ┏━━━━━━━━━━━━━━━━━━━\033[38;5;46mBCS\033[1;39m━━━━━━━━━━━━━━━━━━━━━┓
-\033[1;39m     ┃ \x1b[1;95m❣︎[𖣘]☔︎\x1b[1;96m𝙉𝘼𝙈𝙀\033[1;34m        : [★] JABER\033[1;39m            ┃
-\033[1;39m     ┃ \x1b[1;95m❣︎[𖣘]☔︎\x1b[1;96m𝙁𝘼𝘾𝙀𝘽𝙊𝙊𝙆\033[1;34m    : [★] JABER x JABER ARMY\033[1;39m   ┃
-\033[1;39m     ┃ \x1b[1;95m❣︎[𖣘]☔︎\x1b[1;96m𝙂𝙄𝙏𝙃𝙐𝘽\033[1;34m      : [★] J x T ARMY\033[1;39m          ┃
+\033[1;39m     ┃ \x1b[1;95m❣︎[𖣘]☔︎\x1b[1;96m𝙉𝘼𝙈𝙀\033[1;34m        : [★] WACIQ\033[1;39m           ┃
+\033[1;39m     ┃ \x1b[1;95m❣︎[𖣘]☔︎\x1b[1;96m𝙁𝘼𝘾𝙀𝘽𝙊𝙊𝙆\033[1;34m    : [★] WACIQ x WACIQ ARMY\033[1;39m  ┃
+\033[1;39m     ┃ \x1b[1;95m❣︎[𖣘]☔︎\x1b[1;96m𝙂𝙄𝙏𝙃𝙐𝘽\033[1;34m      : [★] WACIQ-DEV\033[1;39m          ┃
 \033[1;39m     ┃ \x1b[1;95m❣︎[𖣘]☔︎\x1b[1;96m𝙍𝙄𝙇𝙄𝙂𝙀𝙎𝙃𝙊𝙉\033[1;34m  : [★]𝗕𝗔𝗡𝗚𝗟𝗔𝗗𝗘𝗦𝗛𝗜\033[1;39m        ┃
 \033[1;39m     ┃ \x1b[1;95m❣︎[𖣘]☔︎\x1b[1;96m𝙒𝙃𝘼𝙏𝙎𝘼𝙋𝙋\033[1;34m    : [★]+8801852192547\033[1;39m     ┃
 \033[1;39m     ┃ \x1b[1;95m❣︎[𖣘]☔︎\x1b[1;96m𝙏𝙊𝙊𝙇𝙎 𝙉𝘼𝙈𝙀\033[1;34m  : [★]𝗥𝟰𝗡𝗗𝗢𝗡-𝗖𝗟𝗢𝗡𝗜𝗡𝗚\033[1;39m     ┃
 \033[1;39m     ┃ \x1b[1;95m❣︎[𖣘]☔︎\x1b[1;96m𝙏𝙊𝙊𝙇𝙎 𝙎𝙏𝘼𝙏𝙐𝙎\033[1;34m: [★]free\033[1;39m               ┃
 \033[1;39m     ┗━━━━━━━━━━━━━━━━━━━\033[1;31mTEAM\033[1;39m━━━━━━━━━━━━━━━━━━━━┛
 """
-def animated_logo(logo, width=30, speed=0.02, cycles=3):
-    logo_lines = logo.split('\n')
-    shift = width
-    direction = -1
-    count = 0
 
-    while count < cycles * 2:  # د تګ راتګ شمېر
-        os.system('clear')
-        color = colors[shift % len(colors)]
-        for line in logo_lines:
-            display_line = ' ' * shift + line
-            print(f"{color}{display_line}\033[0m")
+# ټایپ‌سټایل انیمېشن
+def typewriter_logo(logo, speed=0.002):
+    os.system('clear')
+    for char in logo:
+        sys.stdout.write(char)
+        sys.stdout.flush()
         time.sleep(speed)
-        shift += direction
-        if shift < 0 or shift > width:
-            direction *= -1
-            count += 1  # یو بشپړ تګ وشو
-colors = ['\033[91m', '\033[92m', '\033[93m', '\033[94m', '\033[95m', '\033[96m']
+    print("\033[0m")  # رنګونه بېرته عادي ته
 
-def animated_logo(logo, width=30, speed=0.02):
-    logo_lines = logo.split('\n')
-    shift = width
-    direction = -1
-    while True:
-        os.system('clear')
-        color = colors[shift % len(colors)]
-        for line in logo_lines:
-            display_line = ' ' * shift
-            for char in line:
-                display_line += char
-                sys.stdout.write(f"{color}{display_line}\033[0m\r")
-                sys.stdout.flush()
-                time.sleep(speed)
-            print()
-        shift += direction
-        if shift < 0 or shift > width:
-            direction *= -1
+# د لوگو اجرا
+typewriter_logo(logo) 
 
 def start_logo_thread():
     t = threading.Thread(target=animated_logo, args=(logo,))
