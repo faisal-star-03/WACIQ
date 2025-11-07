@@ -115,7 +115,23 @@ logo = """\
 \033[1;39m     ┃ \x1b[1;95m❣︎[𖣘]☔︎\x1b[1;96m𝙏𝙊𝙊𝙇𝙎 𝙎𝙏𝘼𝙏𝙐𝙎\033[1;34m: [★]free\033[1;39m               ┃
 \033[1;39m     ┗━━━━━━━━━━━━━━━━━━━\033[1;31mTEAM\033[1;39m━━━━━━━━━━━━━━━━━━━━┛
 """
+def animated_logo(logo, width=30, speed=0.02, cycles=3):
+    logo_lines = logo.split('\n')
+    shift = width
+    direction = -1
+    count = 0
 
+    while count < cycles * 2:  # د تګ راتګ شمېر
+        os.system('clear')
+        color = colors[shift % len(colors)]
+        for line in logo_lines:
+            display_line = ' ' * shift + line
+            print(f"{color}{display_line}\033[0m")
+        time.sleep(speed)
+        shift += direction
+        if shift < 0 or shift > width:
+            direction *= -1
+            count += 1  # یو بشپړ تګ وشو
 colors = ['\033[91m', '\033[92m', '\033[93m', '\033[94m', '\033[95m', '\033[96m']
 
 def animated_logo(logo, width=30, speed=0.02):
