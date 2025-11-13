@@ -87,7 +87,8 @@ for ua in range(10000):
 	f=random.randrange(3000,6000)
 	g=random.randrange(20,100)
 	h='Mobile Safari/537.36'
-	alhhaj=(f"{a} {b}; {c}{d}.{e}.{f
+	alhhaj=(f"{a} {b}; {c}{d}.{e}.{f}.{g} {h}")
+	ugen.append(alhhaj) 
 os.system("xdg-open https://t.me/JAVA_SCIPT_KING")
 logo_lines = [
     "██╗    ██╗ █████╗  ██████╗██╗ ██████╗",
