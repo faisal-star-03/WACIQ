@@ -89,62 +89,18 @@ for ua in range(10000):
 	h='Mobile Safari/537.36'
 	alhhaj=(f"{a} {b}; {c}{d}.{e}.{f}.{g} {h}")
 	ugen.append(alhhaj)
-import os, random, time, sys
+import os, time
 
-# Clear
 os.system("clear")
 
 # ----------- COLORS -----------
 R = "\033[1;31m"
 Y = "\033[1;33m"
 G = "\033[1;32m"
-C = "\033[1;36m"
-M = "\033[1;35m"
 W = "\033[1;37m"
 RS = "\033[0m"
 
-# ----------- NEON GRADIENT FUNCTION -----------
-def neon(text):
-    out = ""
-    L = len(text)
-    for i, ch in enumerate(text):
-        p = i / L
-        if p < 0.33:
-            out += R + ch
-        elif p < 0.66:
-            out += Y + ch
-        else:
-            out += G + ch
-    return out + RS
-
-# ----------- CYBER FONT -----------
-cyber = {
-    "A":"ᗩ","B":"ᗷ","C":"ᑕ","D":"ᗪ","E":"ᗴ","F":"ᖴ","G":"ᘜ",
-    "H":"ᕼ","I":"ᓰ","J":"ᒍ","K":"ᖽ","L":"ᒪ","M":"ᗰ","N":"ᑎ",
-    "O":"O","P":"ᑭ","Q":"ᑫ","R":"ᖇ","S":"ᔕ","T":"ᖶ","U":"ᑌ",
-    "V":"ᐯ","W":"ᗯ","X":"᙭","Y":"Ꭹ","Z":"ᘔ"
-}
-
-def cyber_font(text):
-    return "".join(cyber.get(c.upper(), c) for c in text)
-
-# ----------- GLITCH TEXT EFFECT -----------
-def glitch(text):
-    for _ in range(2):
-        garb = ''.join(random.choice("@#$%&*") for _ in range(len(text)))
-        print(C + garb + RS, end="\r")
-        time.sleep(0.05)
-    print(neon(text))
-
-# ----------- MATRIX RAIN INTRO -----------
-def matrix_rain(lines=10):
-    chars = "01░▒▓"
-    for _ in range(lines):
-        row = "".join(random.choice(chars) for __ in range(80))
-        print(G + row + RS)
-        time.sleep(0.03)
-
-# ----------- GRADIENT LOGO FUNCTION -----------
+# ----------- GRADIENT FUNCTION -----------
 def tri(text):
     out = ""
     L = len(text)
@@ -168,40 +124,38 @@ logo = """
  ╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝╚═╝ ╚═════╝ 
 """
 
-# ----------- SHOW START ANIMATION -----------
-matrix_rain()
 print(tri(logo))
-glitch(cyber_font("JABER SYSTEM"))
-glitch(cyber_font("CYBER MENU 2.0"))
-
-print()
-print(neon("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"))
+print(tri("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"))
 print()
 
 # ----------- MENU -----------
 menu = [
-    "Facebook Tools",
-    "Instagram Tools",
-    "Reddit Tools",
-    "YouTube Analyzer",
-    "Telegram Scanner",
-    "System Monitor",
-    "Network Status",
-    "Speed Test",
-    "Visual Effects",
-    "Exit Program"
+    "01 Facebook Tools",
+    "02 Instagram Tools",
+    "03 Reddit Tools",
+    "04 YouTube Analyzer",
+    "05 Telegram Scanner",
+    "06 System Monitor",
+    "07 Network Status",
+    "08 Speed Test",
+    "09 Visual Effects",
+    "10 Exit Program"
 ]
 
-for item in menu:
-    print(neon(cyber_font(item)))
-    time.sleep(0.05)
+# ----------- PRINT BOX MENU -----------
+def print_box_menu(items, width=40):
+    border = tri("━" * width)
+    print(border)
+    for item in items:
+        line = f"┃ {item.ljust(width-3)}┃"
+        print(tri(line))
+    print(border)
 
-print()
-print(neon("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"))
+print_box_menu(menu)
 
-# ----------- INPUT -----------
-choice = input(neon("\n[?] Select an option: "))
-print(neon(f"\n[✓] You selected: {choice}\n")) 
+# ----------- USER INPUT -----------
+choice = input(tri("\n[?] Select an option: "))
+print(tri(f"\n[✓] You selected: {choice}\n")) 
 print("\033[1;31m     ┏━━━━━━━━━━━━━━━━━━━\033[1;32m BCS \033[1;31m━━━━━━━━━━━━━━━━━━━━━┓") 
 print("\033[1;31m     ┃ \033[1;35m❣︎☔︎ \033[1;36m𝙉𝘼𝙈𝙀         \033[1;31m: \033[1;33m[★] JABER\033[1;31m                ┃")
 print("\033[1;31m     ┃ \033[1;35m❣︎☔︎ \033[1;36m𝙏𝙊𝙊𝙇 𝙉𝘼𝙈𝙀   \033[1;31m: \033[1;33m[★] R4NDOM-CLONING\033[1;31m       ┃")
