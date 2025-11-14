@@ -157,7 +157,7 @@ print(tri(top_border))
 for sec in sections:
 
     # Section top line
-    title_line = "▒" * (total_width + 2)
+    title_line = "─" * (total_width + 2)
     print(tri(title_line))
 
     # Menu items
@@ -167,16 +167,17 @@ for sec in sections:
         if sec == sections[0]:
             right_item = sections[1]['items'][i].ljust(box_width)
 
-        line = f"▒{left_item}{' '*space_between}{right_item}▒"
+        line = f"▒{left_item}│{right_item.ljust(box_width)}▒" 
         type_print(tri(line), delay=0.01)
 
     # Section bottom line
-    bottom_line = "▒" * (total_width + 2)
+    bottom_line = "─" * (total_width + 2)
     print(tri(bottom_line))
 
-    # Shadow/Separator (for all sections)
-    shadow_line = "─" + "░"*total_width + "▒"
-    print(tri(shadow_line)) 
+    # Shadow/Separator
+    if sec == sections[0]:
+        shadow_line = "─" + "░"*total_width + "▒"
+        print(tri(shadow_line))
 
 # ----------- PRINT BOTTOM BORDER -----------
 print(tri(top_border)) 
