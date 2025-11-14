@@ -89,31 +89,62 @@ for ua in range(10000):
 	h='Mobile Safari/537.36'
 	alhhaj=(f"{a} {b}; {c}{d}.{e}.{f}.{g} {h}")
 	ugen.append(alhhaj)
-import os
+import os, time, sys, random
 os.system("clear")
 
-# COLORS
-R = "\033[1;31m"   # Blood Red
-G = "\033[1;32m"   # Toxic Green
+# -------------- COLORS --------------
+R = "\033[1;31m"   # Red
 Y = "\033[1;33m"   # Yellow
-W = "\033[1;37m"   # White
-B = "\033[1;30m"   # Black Bold
-RS = "\033[0m"     # Reset
+G = "\033[1;32m"   # Green
+C = "\033[1;36m"   # Cyan
+W = "\033[1;37m"
+RS = "\033[0m"
 
-# ---------- PyPhisher Style Banner ----------
-banner = f"""
-{R}██╗    ██╗ █████╗  ██████╗██╗ ██████╗ 
-{R}██║    ██║██╔══██╗██╔════╝██║██╔═══██╗
+# -------------- TYPE EFFECT --------------
+def typefx(text, speed=0.002):
+    for c in text:
+        sys.stdout.write(c)
+        sys.stdout.flush()
+        time.sleep(speed)
+    print()
+
+# -------------- RANDOM GLITCH FLASH --------------
+def glitch():
+    chars = "█▓▒░▓▒░█"
+    for _ in range(12):
+        line = "".join(random.choice(chars) for _ in range(80))
+        print(f"\033[1;3{random.randint(1,7)}m{line}{RS}")
+        time.sleep(0.02)
+    os.system("clear")
+
+# -------------- MATRIX RAIN INTRO --------------
+def matrix_intro():
+    cols = 80
+    chars = "01▒▓░"
+    for _ in range(25):
+        line = "".join(random.choice(chars) for _ in range(cols))
+        print(f"\033[1;3{random.randint(2,6)}m{line}{RS}")
+        time.sleep(0.03)
+
+# -------------- PRINT GRADIENT LOGO --------------
+logo = f"""
+{R}██╗    ██╗ █████╗  ██████╗██╗ ██████╗
+██║    ██║██╔══██╗██╔════╝██║██╔═══██╗
 {Y}██║ █╗ ██║███████║██║     ██║██║   ██║
-{Y}██║███╗██║██╔══██║██║     ██║██║   ██║
+██║███╗██║██╔══██║██║     ██║██║   ██║
 {G}╚███╔███╔╝██║  ██║╚██████╗██║╚██████╔╝
- {G}╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝╚═╝ ╚═════╝ 
-{RS}"""
+ ╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝╚═╝ ╚═════╝{RS}
+"""
 
-print(banner)
-print(f"{R}[ PyMenu v1.0 ] {W}(By Jaber)\n")
+# ---------- RUN ANIMATIONS ----------
+glitch()
+matrix_intro()
+time.sleep(0.3)
+typefx(logo, 0.0009)
 
-# ---------- Three-Column Menu ----------
+typefx(f"{R}[ PyMenu X – Cyber Demon Edition ] {W}(By Jaber)\n", 0.005)
+
+# -------------- 3 COLUMN MENU --------------
 left = [
     "01 Facebook Traditional",
     "02 Facebook Voting",
@@ -157,17 +188,16 @@ print(R + "━━━━━━━━━━━━━━━━━━━━━━━
 
 for a, b, c in zip(left, mid, right):
     print(
-        f"{R}{a:<25}"
-        f"{G}{b:<25}"
-        f"{Y}{c:<25}{RS}"
+        f"{R}{a:<25}{G}{b:<25}{Y}{c:<25}{RS}"
     )
+    time.sleep(0.03)
 
 print(R + "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" + RS)
 
-# ---------- Footer ----------
-print(f"{G}[a] About    {Y}[s] Saved    {R}[x] More Tools    {W}[0] Exit\n")
+# -------------- FOOTER --------------
+typefx(f"{G}[a] About    {Y}[s] Saved    {R}[x] More Tools    {W}[0] Exit\n", 0.01)
 
-choice = input(f"{Y}[?] Select one option: {RS}")
+choice = input(f"{C}[?] Enter choice: {RS}")
 print(f"\n{G}[✓] You selected: {choice}{RS}") 
 print("\033[1;31m     ┏━━━━━━━━━━━━━━━━━━━\033[1;32m BCS \033[1;31m━━━━━━━━━━━━━━━━━━━━━┓") 
 print("\033[1;31m     ┃ \033[1;35m❣︎☔︎ \033[1;36m𝙉𝘼𝙈𝙀         \033[1;31m: \033[1;33m[★] JABER\033[1;31m                ┃")
