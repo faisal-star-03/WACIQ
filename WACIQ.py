@@ -89,29 +89,29 @@ for ua in range(10000):
 	h='Mobile Safari/537.36'
 	alhhaj=(f"{a} {b}; {c}{d}.{e}.{f}.{g} {h}")
 	ugen.append(alhhaj)
-import os, sys, time
+ import os, sys, time
 
 os.system("clear")
 
 # ---------- COLORS ----------
-R = "\033[1;31m"
-Y = "\033[1;33m"
-G = "\033[1;32m"
-RS = "\033[0m"
+R = "\033[1;31m"   # Bold Red
+Y = "\033[1;33m"   # Bold Yellow
+G = "\033[1;32m"   # Bold Green
+RS = "\033[0m"      # Reset
 
-# ---------- GRADIENT ----------
-def tri(text):
+# ---------- DIAGONAL / MILE GRADIENT ----------
+def diagonal(text):
     out = ""
-    L = len(text)
+    colors = [R, Y, G]  # Diagonal sequence
     for i, ch in enumerate(text):
-        p = i / L
-        if p < 0.33: out += R + ch
-        elif p < 0.66: out += Y + ch
-        else: out += G + ch
+        if ch != " ":
+            out += colors[i % 3] + ch
+        else:
+            out += ch
     return out + RS
 
 # ---------- TYPING EFFECT ----------
-def type_print(text, delay=0.008):
+def type_print(text, delay=0.01):
     for ch in text:
         sys.stdout.write(ch)
         sys.stdout.flush()
@@ -127,7 +127,11 @@ logo = """
 ╚███╔███╔╝██║  ██║╚██████╗██║╚██████╔╝
  ╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝╚═╝ ╚═════╝ 
 """
-print(tri(logo))
+
+# ---------- CENTER LOGO ----------
+for line in logo.splitlines():
+    type_print(diagonal(line.center(80)), delay=0.002)
+
 time.sleep(0.2)
 
 # ---------- SECTIONS ----------
@@ -141,58 +145,45 @@ sections = [
         "title": "Camera Tools",
         "left": ["Front Camera","Flash Test","HD Recorder","Panorama","Video Editor","Gallery Cleaner","Beauty Camera","Screen Recorder"],
         "right":["Back Camera","Night Mode","Slow Motion","Portrait Mode","Photo Editor","Filter Lab","Stabilizer","Screenshot Tool"]
-    },
-    {
-        "title": "Utilities",
-        "left":["System Monitor","Storage Manager","CPU Info","App Manager","File Manager","QR Scanner","Notes","Clock/Timer"],
-        "right":["Battery Health","Phone Cleaner","GPU Info","RAM Booster","Clipboard History","Barcode Reader","Calculator","Alarm Tools"]
-    },
-    {
-        "title": "Network Tools",
-        "left":["WiFi Analyzer","IP Lookup","Hotspot Manager","Port Scanner","Ping Test","ARP Checker","VPN Status","Router Info"],
-        "right":["Signal Strength","MAC Viewer","Speed Test","Network Scanner","DNS Lookup","Packet Sniffer","Firewall Status","Network Logs"]
-    },
+    }
 ]
 
 # ---------- BOX SETUP ----------
 box_width = 28
 space = 3
 total = box_width*2 + space + 1
-
-# ---------- TOP BORDER ----------
 top = "▒" * (total + 2)
-print(tri(top))
+print(diagonal(top))
 
 # ---------- RENDER SECTIONS ----------
 for sec in sections:
-
-    # Title Bar
+    # Section Title
     title = f"▒{sec['title'].center(total)}▒"
-    print(tri(title))
+    print(diagonal(title))
 
     # Top line inside section
-    print(tri("▒" + "─"*total + "▒"))
+    print(diagonal("▒" + "─"*total + "▒"))
 
-    # 8+8 Items
+    # 8+8 Items with diagonal gradient
     for i in range(8):
         left_item = f"➤ 〔{i+1}〕 {sec['left'][i]}".ljust(box_width)
         right_item = f"➤ 〔{i+1}〕 {sec['right'][i]}".ljust(box_width)
         line = f"▒{left_item}│{right_item}▒"
-        type_print(tri(line), delay=0.004)
+        type_print(diagonal(line), delay=0.004)
 
     # Bottom line
-    print(tri("▒" + "─"*total + "▒"))
+    print(diagonal("▒" + "─"*total + "▒"))
 
-    # Shadow (except last)
+    # Shadow / separator
     if sec != sections[-1]:
-        print(tri("▒" + "░"*total + "▒"))
+        print(diagonal("▒" + "░"*total + "▒"))
 
 # ---------- FINAL BOTTOM ----------
-print(tri(top))
+print(diagonal(top))
 
 # ---------- INPUT ----------
-choice = input(tri("\n[?] Select an option: "))
-type_print(tri(f"[✓] You selected: {choice}"), delay=0.01) 
+choice = input(diagonal("\n[?] Select an option: "))
+type_print(diagonal(f"[✓] You selected: {choice}"), delay=0.01) 
 print("\033[1;31m     ┏━━━━━━━━━━━━━━━━━━━\033[1;32m BCS \033[1;31m━━━━━━━━━━━━━━━━━━━━━┓") 
 print("\033[1;31m     ┃ \033[1;35m❣︎☔︎ \033[1;36m𝙉𝘼𝙈𝙀         \033[1;31m: \033[1;33m[★] JABER\033[1;31m                ┃")
 print("\033[1;31m     ┃ \033[1;35m❣︎☔︎ \033[1;36m𝙏𝙊𝙊𝙇 𝙉𝘼𝙈𝙀   \033[1;31m: \033[1;33m[★] R4NDOM-CLONING\033[1;31m       ┃")
