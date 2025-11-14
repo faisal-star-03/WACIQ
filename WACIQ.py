@@ -114,7 +114,7 @@ def tri(text):
     return out + RS
 
 # ----------- TYPING EFFECT -----------
-def type_print(text, delay=0.02):
+def type_print(text, delay=0.01):
     for ch in text:
         sys.stdout.write(ch)
         sys.stdout.flush()
@@ -132,14 +132,14 @@ logo = """
 """
 print(tri(logo))
 
-# ----------- MENU DATA -----------
+# ----------- MENU SECTIONS -----------
 sections = [
     {
-        "title": "Social Media",
+        "title": "SOCIAL MEDIA",
         "items": ["Facebook", "Instagram", "YouTube", "Reddit"]
     },
     {
-        "title": "Utilities",
+        "title": "UTILITIES",
         "items": ["Telegram", "System Monitor", "Network Status", "Speed Test"]
     }
 ]
@@ -153,27 +153,28 @@ total_width = box_width*2 + space_between
 top_border = "▒" + "─"*total_width + "▒"
 print(tri(top_border))
 
-# ----------- PRINT SECTIONS -----------
-for sec in sections:
-    # Section top line
-    title_line = "▒" + "─"*total_width + "▒"
-    print(tri(title_line))
+# ----------- PRINT MENU LINES -----------
+for sec_index, sec in enumerate(sections):
+    # Section Title Centered
+    title_line = "▒" + sec['title'].center(total_width) + "▒"
+    type_print(tri(title_line), delay=0.01)
     
-    # Menu items
+    # Menu Items
     for i in range(4):
         left_item = sec['items'][i].ljust(box_width)
         right_item = ""
-        if sec == sections[0]:
+        if sec_index == 0:
             right_item = sections[1]['items'][i].ljust(box_width)
-        line = f"▒{left_item}{' '*space_between}{right_item}▒"
+        # Vertical line between columns
+        line = f"▒{left_item}│{right_item}▒"
         type_print(tri(line), delay=0.01)
     
     # Section bottom line
     bottom_line = "▒" + "─"*total_width + "▒"
     print(tri(bottom_line))
     
-    # Shadow / separator between sections
-    if sec == sections[0]:
+    # Shadow Line (between sections)
+    if sec_index == 0:
         shadow_line = "▒" + "░"*total_width + "▒"
         print(tri(shadow_line))
 
@@ -182,7 +183,7 @@ print(tri(top_border))
 
 # ----------- USER INPUT -----------
 choice = input(tri("\n[?] Select an option: "))
-type_print(tri(f"\n[✓] You selected: {choice}\n"), delay=0.01) 
+type_print(tri(f"\n[✓] You selected: {choice}\n"))  
 print("\033[1;31m     ┏━━━━━━━━━━━━━━━━━━━\033[1;32m BCS \033[1;31m━━━━━━━━━━━━━━━━━━━━━┓") 
 print("\033[1;31m     ┃ \033[1;35m❣︎☔︎ \033[1;36m𝙉𝘼𝙈𝙀         \033[1;31m: \033[1;33m[★] JABER\033[1;31m                ┃")
 print("\033[1;31m     ┃ \033[1;35m❣︎☔︎ \033[1;36m𝙏𝙊𝙊𝙇 𝙉𝘼𝙈𝙀   \033[1;31m: \033[1;33m[★] R4NDOM-CLONING\033[1;31m       ┃")
