@@ -150,35 +150,37 @@ space_between = 4
 total_width = box_width*2 + space_between
 
 # ----------- PRINT TOP BORDER -----------
-top_border = "▒" + "─"*total_width + "▒"
+top_border = "▒" * (total_width + 2)
 print(tri(top_border))
 
 # ----------- PRINT SECTIONS -----------
 for sec in sections:
+
     # Section top line
-    title_line = "▒" + "─"*total_width + "▒"
+    title_line = "▒" * (total_width + 2)
     print(tri(title_line))
-    
+
     # Menu items
     for i in range(4):
         left_item = sec['items'][i].ljust(box_width)
         right_item = ""
         if sec == sections[0]:
             right_item = sections[1]['items'][i].ljust(box_width)
+
         line = f"▒{left_item}{' '*space_between}{right_item}▒"
         type_print(tri(line), delay=0.01)
-    
+
     # Section bottom line
-    bottom_line = "▒" + "─"*total_width + "▒"
+    bottom_line = "▒" * (total_width + 2)
     print(tri(bottom_line))
-    
-    # Shadow / separator between sections
+
+    # Shadow/Separator
     if sec == sections[0]:
         shadow_line = "▒" + "░"*total_width + "▒"
         print(tri(shadow_line))
 
 # ----------- PRINT BOTTOM BORDER -----------
-print(tri(top_border))
+print(tri(top_border)) 
 
 # ----------- USER INPUT -----------
 choice = input(tri("\n[?] Select an option: "))
