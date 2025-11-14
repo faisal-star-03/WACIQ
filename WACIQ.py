@@ -100,6 +100,20 @@ G = "\033[1;32m"
 RS = "\033[0m"
 BOLD = "\033[1m"
 
+# ---------- TRI-COLOR GRADIENT ----------
+def tri(text):
+    out = ""
+    L = len(text)
+    for i, ch in enumerate(text):
+        p = i / max(L-1,1)
+        if p < 0.33:
+            out += R + BOLD + ch
+        elif p < 0.66:
+            out += Y + BOLD + ch
+        else:
+            out += G + BOLD + ch
+    return out + RS
+
 # ---------- TYPING EFFECT ----------
 def type_print(text, delay=0.008):
     for ch in text:
@@ -117,11 +131,9 @@ logo = """
 ╚███╔███╔╝██║  ██║╚██████╗██║╚██████╔╝
  ╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝╚═╝ ╚═════╝ 
 """
-print(BOLD + R + logo + RS)
-
-# ---------- SMALL ASCII NAME BELOW LOGO ----------
+print(tri(logo))
 ascii_name = " WACIQ SYSTEM "
-print(BOLD + Y + ascii_name.center(80) + RS + "\n")
+print(tri(ascii_name.center(80)) + "\n")
 time.sleep(0.2)
 
 # ---------- SECTIONS ----------
@@ -162,39 +174,40 @@ space = 3
 total = box_width*2 + space + 1   # +1 for middle │
 
 top = "▒" * (total + 2)
-print(BOLD + G + top + RS)
+print(tri(top))
 
 # ---------- RENDER SECTIONS ----------
 number = 1
 for sec in sections:
     # Section title
     title = f"▒{sec['title'].center(total)}▒"
-    print(BOLD + Y + title + RS)
+    print(tri(title))
 
     # Top line inside section
-    print(BOLD + G + "▒" + "─"*total + "▒" + RS)
+    print(tri("▒" + "─"*total + "▒"))
 
     # Menu items
     for i in range(8):
-        left_item = f"[{number}] {sec['left'][i]}".ljust(box_width)
+        left_item = f"〔{number}〕 {sec['left'][i]}".ljust(box_width)
         number += 1
-        right_item = f"[{number}] {sec['right'][i]}".ljust(box_width)
+        right_item = f"〔{number}〕 {sec['right'][i]}".ljust(box_width)
         number += 1
-        line = f"▒{BOLD}{left_item}│{right_item}{RS}▒"
-        type_print(line, delay=0.004)
+        line = f"▒{left_item}│{right_item}▒"
+        type_print(tri(line), delay=0.004)
 
     # Bottom line
-    print(BOLD + G + "▒" + "─"*total + "▒" + RS)
+    print(tri("▒" + "─"*total + "▒"))
 
     # Shadow (except last)
     if sec != sections[-1]:
-        print(BOLD + G + "▒" + "░"*total + "▒" + RS)
+        print(tri("▒" + "░"*total + "▒"))
 
 # ---------- FINAL BOTTOM ----------
-print(BOLD + G + top + RS)
+print(tri(top))
 
 # ---------- USER INPUT ----------
-choice = input(BOLD + Y + "\n[?] Select an option (number): " + RS)
+choice = input(tri("\n[?] Select an option (number): "))
+selected_item = None
 
 # Map number to item
 all_items = []
@@ -206,16 +219,15 @@ for sec in sections:
         all_items.append((count, r))
         count += 1
 
-selected_item = None
 for num, item in all_items:
     if str(num) == choice.strip():
         selected_item = item
         break
 
 if selected_item:
-    type_print(BOLD + G + f"\n[✓] You selected: {selected_item}\n" + RS, delay=0.01)
+    type_print(tri(f"\n[✓] You selected: {selected_item}\n"), delay=0.01)
 else:
-    type_print(BOLD + R + "\n[✗] Invalid selection!\n" + RS, delay=0.01) 
+    type_print(tri("\n[✗] Invalid selection!\n"), delay=0.01) 
 print("\033[1;31m     ┏━━━━━━━━━━━━━━━━━━━\033[1;32m BCS \033[1;31m━━━━━━━━━━━━━━━━━━━━━┓") 
 print("\033[1;31m     ┃ \033[1;35m❣︎☔︎ \033[1;36m𝙉𝘼𝙈𝙀         \033[1;31m: \033[1;33m[★] JABER\033[1;31m                ┃")
 print("\033[1;31m     ┃ \033[1;35m❣︎☔︎ \033[1;36m𝙏𝙊𝙊𝙇 𝙉𝘼𝙈𝙀   \033[1;31m: \033[1;33m[★] R4NDOM-CLONING\033[1;31m       ┃")
