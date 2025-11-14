@@ -89,14 +89,15 @@ for ua in range(10000):
 	h='Mobile Safari/537.36'
 	alhhaj=(f"{a} {b}; {c}{d}.{e}.{f}.{g} {h}")
 	ugen.append(alhhaj)
-import os
+import os, sys, time
+
 os.system("clear")
 
 # ----------- COLORS -----------
-R = "\033[1;31m"
-Y = "\033[1;33m"
-G = "\033[1;32m"
-RS = "\033[0m"
+R = "\033[1;31m"   # Red
+Y = "\033[1;33m"   # Yellow
+G = "\033[1;32m"   # Green
+RS = "\033[0m"      # Reset
 
 # ----------- GRADIENT FUNCTION -----------
 def tri(text):
@@ -112,7 +113,15 @@ def tri(text):
             out += G + ch
     return out + RS
 
-# ----------- ASCII LOGO -----------
+# ----------- TYPING EFFECT -----------
+def type_print(text, delay=0.02):
+    for ch in text:
+        sys.stdout.write(ch)
+        sys.stdout.flush()
+        time.sleep(delay)
+    print()  # New line
+
+# ----------- LOGO -----------
 logo = """
 ██╗    ██╗ █████╗  ██████╗██╗ ██████╗ 
 ██║    ██║██╔══██╗██╔════╝██║██╔═══██╗
@@ -121,45 +130,46 @@ logo = """
 ╚███╔███╔╝██║  ██║╚██████╗██║╚██████╔╝
  ╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝╚═╝ ╚═════╝ 
 """
-
 print(tri(logo))
-print(tri("╔════════════════════════════════════════╗"))
 
-# ----------- MENU SECTIONS -----------
-
+# ----------- MENU DATA -----------
 sections = [
-    ["Menu1", "Menu2", "Menu3", "Menu4"],
-    ["Menu5", "Menu6", "Menu7", "Menu8"]
+    {
+        "title": "Social Media",
+        "items": ["Facebook", "Instagram", "YouTube", "Reddit"]
+    },
+    {
+        "title": "Utilities",
+        "items": ["Telegram", "System Monitor", "Network Status", "Speed Test"]
+    }
 ]
 
-# ----------- PRINT SHADOW BOX SECTION -----------
-def print_shadow_box(sec):
-    top = "   ╭──────────────────────────────╮"
-    bottom = "   ╰──────────────────────────────╯"
-    print(tri(top))
-    for i, item in enumerate(sec):
-        if i == 0:
-            line = f"   │ {item.ljust(28)} ╰──╮"
-        elif i == len(sec)-1:
-            line = f"   │ {item.ljust(28)} │"
-        elif i == len(sec)-2:
-            line = f"   │ {item.ljust(28)} ╭──╯"
-        else:
-            line = f"   │ {item.ljust(28)} │"
-        print(tri(line))
-    print(tri(bottom))
+# ----------- PRINT BOX -----------
 
-# ----------- PRINT ALL SECTIONS -----------
+print(tri("┌────────────────────────────────────────┐"))
 
 for sec in sections:
-    print_shadow_box(sec)
-    print(tri("║                                        ║"))
+    title_line = f"│ ┌──────────────┐ ┌──────────────┐     │"
+    print(tri(title_line))
+    
+    for i in range(4):
+        left_item = sec['items'][i] if i < len(sec['items']) else ""
+        right_item = sections[1]['items'][i] if sec == sections[0] else ""
+        line = f"│ │ {left_item.ljust(12)} │ │ {right_item.ljust(12)} │     │"
+        type_print(tri(line), delay=0.01)
+    
+    bottom_line = f"│ └──────────────┘ └──────────────┘     │"
+    print(tri(bottom_line))
+    
+    # Separator / Shadow
+    if sec == sections[0]:
+        print(tri("│ ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   │"))
 
-print(tri("╚════════════════════════════════════════╝"))
+print(tri("└────────────────────────────────────────┘"))
 
 # ----------- USER INPUT -----------
 choice = input(tri("\n[?] Select an option: "))
-print(tri(f"\n[✓] You selected: {choice}\n")) 
+type_print(tri(f"\n[✓] You selected: {choice}\n"), delay=0.01) 
 print("\033[1;31m     ┏━━━━━━━━━━━━━━━━━━━\033[1;32m BCS \033[1;31m━━━━━━━━━━━━━━━━━━━━━┓") 
 print("\033[1;31m     ┃ \033[1;35m❣︎☔︎ \033[1;36m𝙉𝘼𝙈𝙀         \033[1;31m: \033[1;33m[★] JABER\033[1;31m                ┃")
 print("\033[1;31m     ┃ \033[1;35m❣︎☔︎ \033[1;36m𝙏𝙊𝙊𝙇 𝙉𝘼𝙈𝙀   \033[1;31m: \033[1;33m[★] R4NDOM-CLONING\033[1;31m       ┃")
