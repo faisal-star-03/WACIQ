@@ -93,120 +93,106 @@ import os, sys, time
 
 os.system("clear")
 
-#---------- COLORS ----------
-
+# ---------- COLORS ----------
 R = "\033[1;31m"
 Y = "\033[1;33m"
 G = "\033[1;32m"
 RS = "\033[0m"
 
-#---------- GRADIENT ----------
-
+# ---------- GRADIENT ----------
 def tri(text):
-out = ""
-L = len(text)
-for i, ch in enumerate(text):
-p = i / L
-if p < 0.33: out += R + ch
-elif p < 0.66: out += Y + ch
-else: out += G + ch
-return out + RS
+    out = ""
+    L = len(text)
+    for i, ch in enumerate(text):
+        p = i / L
+        if p < 0.33: out += R + ch
+        elif p < 0.66: out += Y + ch
+        else: out += G + ch
+    return out + RS
 
-#---------- TYPING EFFECT ----------
-
+# ---------- TYPING EFFECT ----------
 def type_print(text, delay=0.008):
-for ch in text:
-sys.stdout.write(ch)
-sys.stdout.flush()
-time.sleep(delay)
-print()
+    for ch in text:
+        sys.stdout.write(ch)
+        sys.stdout.flush()
+        time.sleep(delay)
+    print()
 
-#---------- LOGO ----------
-
+# ---------- LOGO ----------
 logo = """
-██╗    ██╗ █████╗  ██████╗██╗ ██████╗
+██╗    ██╗ █████╗  ██████╗██╗ ██████╗ 
 ██║    ██║██╔══██╗██╔════╝██║██╔═══██╗
 ██║ █╗ ██║███████║██║     ██║██║   ██║
 ██║███╗██║██╔══██║██║     ██║██║   ██║
 ╚███╔███╔╝██║  ██║╚██████╗██║╚██████╔╝
-╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝╚═╝ ╚═════╝
+ ╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝╚═╝ ╚═════╝ 
 """
-
 print(tri(logo))
 time.sleep(0.2)
 
-#---------- SECTIONS ----------
-
+# ---------- SECTIONS ----------
 sections = [
-{
-"title": "Social Media",
-"left": [
-"Facebook","WhatsApp","TikTok","YouTube",
-"Messenger","LinkedIn","Viber","Likee"
-],
-"right": [
-"Instagram","Snapchat","Reddit","Twitter/X",
-"Pinterest","Tumblr","Discord","Telegram"
+    {
+        "title": "Social Media",
+        "left": ["Facebook","WhatsApp","TikTok","YouTube","Messenger","LinkedIn","Viber","Likee"],
+        "right":["Instagram","Snapchat","Reddit","Twitter/X","Pinterest","Tumblr","Discord","Telegram"]
+    },
+    {
+        "title": "Camera Tools",
+        "left": ["Front Camera","Flash Test","HD Recorder","Panorama","Video Editor","Gallery Cleaner","Beauty Camera","Screen Recorder"],
+        "right":["Back Camera","Night Mode","Slow Motion","Portrait Mode","Photo Editor","Filter Lab","Stabilizer","Screenshot Tool"]
+    },
+    {
+        "title": "Utilities",
+        "left":["System Monitor","Storage Manager","CPU Info","App Manager","File Manager","QR Scanner","Notes","Clock/Timer"],
+        "right":["Battery Health","Phone Cleaner","GPU Info","RAM Booster","Clipboard History","Barcode Reader","Calculator","Alarm Tools"]
+    },
+    {
+        "title": "Network Tools",
+        "left":["WiFi Analyzer","IP Lookup","Hotspot Manager","Port Scanner","Ping Test","ARP Checker","VPN Status","Router Info"],
+        "right":["Signal Strength","MAC Viewer","Speed Test","Network Scanner","DNS Lookup","Packet Sniffer","Firewall Status","Network Logs"]
+    },
 ]
-},
-{
-"title": "Camera Tools",
-"left": [
-"Front Camera","Flash Test","HD Recorder","Panorama",
-"Video Editor","Gallery Cleaner","Beauty Camera","Screen Recorder"
-],
-"right": [
-"Back Camera","Night Mode","Slow Motion","Portrait Mode",
-"Photo Editor","Filter Lab","Stabilizer","Screenshot Tool"
-]
-},
-{
-"title": "Utilities",
-"left": [
-"System Monitor","Storage Manager","CPU Info","App Manager",
-"File Manager","QR Scanner","Notes","Clock/Timer"
-],
-"right": [
-"Battery Health","Phone Cleaner","GPU Info","RAM Booster",
-"Clipboard History","Barcode Reader","Calculator","Alarm Tools"
-]
-},
-{
-"title": "Network Tools",
-"left": [
-"WiFi Analyzer","IP Lookup","Hotspot Manager","Port Scanner",
-"Ping Test","ARP Checker","VPN Status","Router Info"
-],
-"right": [
-"Signal Strength","MAC Viewer","Speed Test","Network Scanner",
-"DNS Lookup","Packet Sniffer","Firewall Status","Network Logs"
-]
-},
-]
- 
-#---------- BOX SETUP ----------
-box_width = 30
-top = "▒" * (box_width + 4)
+
+# ---------- BOX SETUP ----------
+box_width = 28
+space = 3
+total = box_width*2 + space + 1
+
+# ---------- TOP BORDER ----------
+top = "▒" * (total + 2)
 print(tri(top))
 
-# ---------- MENU ITEM RENDER ----------
-for i, item in enumerate(menu_items, 1):
-    line = f"▒  〔{i}〕 {item.ljust(box_width-5)}  ▒"
-    type_print(tri(line), delay=0.004)
+# ---------- RENDER SECTIONS ----------
+for sec in sections:
 
-# ---------- BOTTOM BORDER ----------
+    # Title Bar
+    title = f"▒{sec['title'].center(total)}▒"
+    print(tri(title))
+
+    # Top line inside section
+    print(tri("▒" + "─"*total + "▒"))
+
+    # 8+8 Items
+    for i in range(8):
+        left_item = f"➤ 〔{i+1}〕 {sec['left'][i]}".ljust(box_width)
+        right_item = f"➤ 〔{i+1}〕 {sec['right'][i]}".ljust(box_width)
+        line = f"▒{left_item}│{right_item}▒"
+        type_print(tri(line), delay=0.004)
+
+    # Bottom line
+    print(tri("▒" + "─"*total + "▒"))
+
+    # Shadow (except last)
+    if sec != sections[-1]:
+        print(tri("▒" + "░"*total + "▒"))
+
+# ---------- FINAL BOTTOM ----------
 print(tri(top))
 
-# ---------- USER INPUT ----------
+# ---------- INPUT ----------
 choice = input(tri("\n[?] Select an option: "))
-try:
-    idx = int(choice.strip())
-    if 1 <= idx <= len(menu_items):
-        type_print(tri(f"\n[✓] You selected: {menu_items[idx-1]}\n"), delay=0.008)
-    else:
-        type_print(tri("\n[✗] Invalid selection!\n"), delay=0.008)
-except ValueError:
-    type_print(tri("\n[✗] Invalid input! Please enter a number.\n"), delay=0.008) 
+type_print(tri(f"[✓] You selected: {choice}"), delay=0.01) 
 print("\033[1;31m     ┏━━━━━━━━━━━━━━━━━━━\033[1;32m BCS \033[1;31m━━━━━━━━━━━━━━━━━━━━━┓") 
 print("\033[1;31m     ┃ \033[1;35m❣︎☔︎ \033[1;36m𝙉𝘼𝙈𝙀         \033[1;31m: \033[1;33m[★] JABER\033[1;31m                ┃")
 print("\033[1;31m     ┃ \033[1;35m❣︎☔︎ \033[1;36m𝙏𝙊𝙊𝙇 𝙉𝘼𝙈𝙀   \033[1;31m: \033[1;33m[★] R4NDOM-CLONING\033[1;31m       ┃")
