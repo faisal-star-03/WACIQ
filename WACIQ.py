@@ -135,60 +135,41 @@ time.sleep(0.2)
 sections = [
     {
         "title": "Social Media",
-        "left": [
-            "Facebook","WhatsApp","TikTok","YouTube",
-            "Messenger","LinkedIn","Viber","Likee"
-        ],
-        "right": [
-            "Instagram","Snapchat","Reddit","Twitter/X",
-            "Pinterest","Tumblr","Discord","Telegram"
-        ]
+        "left": ["Facebook","WhatsApp","TikTok","YouTube",
+                 "Messenger","LinkedIn","Viber","Likee"],
+        "right":["Instagram","Snapchat","Reddit","Twitter/X",
+                 "Pinterest","Tumblr","Discord","Telegram"]
     },
     {
         "title": "Camera Tools",
-        "left": [
-            "Front Camera","Flash Test","HD Recorder","Panorama",
-            "Video Editor","Gallery Cleaner","Beauty Camera","Screen Recorder"
-        ],
-        "right": [
-            "Back Camera","Night Mode","Slow Motion","Portrait Mode",
-            "Photo Editor","Filter Lab","Stabilizer","Screenshot Tool"
-        ]
-    },
-    {
-        "title": "Utilities",
-        "left": [
-            "System Monitor","Storage Manager","CPU Info","App Manager",
-            "File Manager","QR Scanner","Notes","Clock/Timer"
-        ],
-        "right": [
-            "Battery Health","Phone Cleaner","GPU Info","RAM Booster",
-            "Clipboard History","Barcode Reader","Calculator","Alarm Tools"
-        ]
-    },
-    {
-        "title": "Network Tools",
-        "left": [
-            "WiFi Analyzer","IP Lookup","Hotspot Manager","Port Scanner",
-            "Ping Test","ARP Checker","VPN Status","Router Info"
-        ],
-        "right": [
-            "Signal Strength","MAC Viewer","Speed Test","Network Scanner",
-            "DNS Lookup","Packet Sniffer","Firewall Status","Network Logs"
-        ]
-    },
+        "left": ["Front Camera","Flash Test","HD Recorder","Panorama",
+                 "Video Editor","Gallery Cleaner","Beauty Camera","Screen Recorder"],
+        "right":["Back Camera","Night Mode","Slow Motion","Portrait Mode",
+                 "Photo Editor","Filter Lab","Stabilizer","Screenshot Tool"]
+    }
 ]
 
 # ---------- BOX SETUP ----------
-box_width = 20
+box_width = 28
 space = 3
 total = box_width*2 + space + 1   # +1 for middle │
+
+# Create flat list of all items with numbers
+all_items = []
+count = 1
+for sec in sections:
+    for l, r in zip(sec['left'], sec['right']):
+        all_items.append((count, l))
+        count += 1
+        all_items.append((count, r))
+        count += 1
 
 # ---------- TOP BORDER ----------
 top = "▒" * (total + 2)
 print(tri(top))
 
 # ---------- RENDER SECTIONS ----------
+number = 1
 for sec in sections:
 
     # Title Bar
@@ -198,26 +179,39 @@ for sec in sections:
     # Top line inside section
     print(tri("▒" + "─"*total + "▒"))
 
-    # 8+8 Items
+    # Items
     for i in range(8):
-        L = sec['left'][i].ljust(box_width)
-        Rg = sec['right'][i].ljust(box_width)
-        line = f"▒{L}│{Rg}▒"
+        left_item = f"〔{number}〕 {sec['left'][i]}".ljust(box_width)
+        number += 1
+        right_item = f"〔{number}〕 {sec['right'][i]}".ljust(box_width)
+        number += 1
+        line = f"▒{left_item}│{right_item}▒"
         type_print(tri(line), delay=0.004)
 
     # Bottom line
     print(tri("▒" + "─"*total + "▒"))
 
-    # Shadow (except last)
+    # Shadow / separator
     if sec != sections[-1]:
         print(tri("▒" + "░"*total + "▒"))
 
 # ---------- FINAL BOTTOM ----------
 print(tri(top))
 
-# ---------- INPUT ----------
-choice = input(tri("\n[?] Select an option: "))
-type_print(tri(f"[✓] You selected: {choice}"), delay=0.01) 
+# ---------- USER INPUT ----------
+choice = input(tri("\n[?] Select an option (number): "))
+
+# Map number to item
+selected_item = None
+for num, item in all_items:
+    if str(num) == choice.strip():
+        selected_item = item
+        break
+
+if selected_item:
+    type_print(tri(f"\n[✓] You selected: {selected_item}\n"), delay=0.01)
+else:
+    type_print(tri("\n[✗] Invalid selection!\n"), delay=0.01)  
 print("\033[1;31m     ┏━━━━━━━━━━━━━━━━━━━\033[1;32m BCS \033[1;31m━━━━━━━━━━━━━━━━━━━━━┓") 
 print("\033[1;31m     ┃ \033[1;35m❣︎☔︎ \033[1;36m𝙉𝘼𝙈𝙀         \033[1;31m: \033[1;33m[★] JABER\033[1;31m                ┃")
 print("\033[1;31m     ┃ \033[1;35m❣︎☔︎ \033[1;36m𝙏𝙊𝙊𝙇 𝙉𝘼𝙈𝙀   \033[1;31m: \033[1;33m[★] R4NDOM-CLONING\033[1;31m       ┃")
