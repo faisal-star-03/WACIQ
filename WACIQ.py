@@ -94,24 +94,24 @@ for ua in range(10000):
 os.system("clear")
 
 # ---------- COLORS ----------
-R = "\033[1;31m"   # Bold Red
-Y = "\033[1;33m"   # Bold Yellow
-G = "\033[1;32m"   # Bold Green
-RS = "\033[0m"      # Reset
+R = "\033[1;31m"
+Y = "\033[1;33m"
+G = "\033[1;32m"
+RS = "\033[0m"
 
-# ---------- DIAGONAL / MILE GRADIENT ----------
-def diagonal(text):
+# ---------- DIAGONAL GRADIENT ----------
+def diagonal(text, start=0):
     out = ""
-    colors = [R, Y, G]  # Diagonal sequence
+    colors = [R, Y, G]
     for i, ch in enumerate(text):
         if ch != " ":
-            out += colors[i % 3] + ch
+            out += colors[(i + start) % 3] + ch
         else:
             out += ch
     return out + RS
 
 # ---------- TYPING EFFECT ----------
-def type_print(text, delay=0.01):
+def type_print(text, delay=0.008):
     for ch in text:
         sys.stdout.write(ch)
         sys.stdout.flush()
@@ -138,13 +138,17 @@ time.sleep(0.2)
 sections = [
     {
         "title": "Social Media",
-        "left": ["Facebook","WhatsApp","TikTok","YouTube","Messenger","LinkedIn","Viber","Likee"],
-        "right":["Instagram","Snapchat","Reddit","Twitter/X","Pinterest","Tumblr","Discord","Telegram"]
+        "left": ["Facebook","WhatsApp","TikTok","YouTube",
+                 "Messenger","LinkedIn","Viber","Likee"],
+        "right":["Instagram","Snapchat","Reddit","Twitter/X",
+                 "Pinterest","Tumblr","Discord","Telegram"]
     },
     {
         "title": "Camera Tools",
-        "left": ["Front Camera","Flash Test","HD Recorder","Panorama","Video Editor","Gallery Cleaner","Beauty Camera","Screen Recorder"],
-        "right":["Back Camera","Night Mode","Slow Motion","Portrait Mode","Photo Editor","Filter Lab","Stabilizer","Screenshot Tool"]
+        "left": ["Front Camera","Flash Test","HD Recorder","Panorama",
+                 "Video Editor","Gallery Cleaner","Beauty Camera","Screen Recorder"],
+        "right":["Back Camera","Night Mode","Slow Motion","Portrait Mode",
+                 "Photo Editor","Filter Lab","Stabilizer","Screenshot Tool"]
     }
 ]
 
@@ -157,28 +161,23 @@ print(diagonal(top))
 
 # ---------- RENDER SECTIONS ----------
 for sec in sections:
-    # Section Title
+
     title = f"▒{sec['title'].center(total)}▒"
     print(diagonal(title))
 
-    # Top line inside section
-    print(diagonal("▒" + "─"*total + "▒"))
+    print(diagonal("▒" + "─" * total + "▒"))
 
-    # 8+8 Items with diagonal gradient
     for i in range(8):
         left_item = f"➤ 〔{i+1}〕 {sec['left'][i]}".ljust(box_width)
         right_item = f"➤ 〔{i+1}〕 {sec['right'][i]}".ljust(box_width)
-        line = f"▒{left_item}│{right_item}▒"
-        type_print(diagonal(line), delay=0.004)
+        line = f"▒{diagonal(left_item, i)}│{diagonal(right_item, i+1)}▒"
+        type_print(line, delay=0.004)
 
-    # Bottom line
-    print(diagonal("▒" + "─"*total + "▒"))
+    print(diagonal("▒" + "─" * total + "▒"))
 
-    # Shadow / separator
     if sec != sections[-1]:
-        print(diagonal("▒" + "░"*total + "▒"))
+        print(diagonal("▒" + "░" * total + "▒"))
 
-# ---------- FINAL BOTTOM ----------
 print(diagonal(top))
 
 # ---------- INPUT ----------
