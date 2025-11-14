@@ -119,7 +119,7 @@ def type_print(text, delay=0.02):
         sys.stdout.write(ch)
         sys.stdout.flush()
         time.sleep(delay)
-    print()  # New line
+    print()
 
 # ----------- LOGO -----------
 logo = """
@@ -144,28 +144,41 @@ sections = [
     }
 ]
 
-# ----------- PRINT BOX -----------
+# ----------- BOX DIMENSIONS -----------
+box_width = 20
+space_between = 4
+total_width = box_width*2 + space_between
 
-print(tri("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"))
+# ----------- PRINT TOP BORDER -----------
+top_border = "▒" + "─"*total_width + "▒"
+print(tri(top_border))
 
+# ----------- PRINT SECTIONS -----------
 for sec in sections:
-    title_line = f"▒──────────────────────────────────────────────▒"
+    # Section top line
+    title_line = "▒" + "─"*total_width + "▒"
     print(tri(title_line))
     
+    # Menu items
     for i in range(4):
-        left_item = sec['items'][i] if i < len(sec['items']) else ""
-        right_item = sections[1]['items'][i] if sec == sections[0] else ""
-        line = f" {left_item.ljust(12)}   {right_item.ljust(12)}      "
+        left_item = sec['items'][i].ljust(box_width)
+        right_item = ""
+        if sec == sections[0]:
+            right_item = sections[1]['items'][i].ljust(box_width)
+        line = f"▒{left_item}{' '*space_between}{right_item}▒"
         type_print(tri(line), delay=0.01)
     
-    bottom_line = f"▒─────────────────────────────────────────────▒"
+    # Section bottom line
+    bottom_line = "▒" + "─"*total_width + "▒"
     print(tri(bottom_line))
     
-    # Separator / Shadow
+    # Shadow / separator between sections
     if sec == sections[0]:
-        print(tri("│ ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░            ▒"))
+        shadow_line = "▒" + "░"*total_width + "▒"
+        print(tri(shadow_line))
 
-print(tri("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"))
+# ----------- PRINT BOTTOM BORDER -----------
+print(tri(top_border))
 
 # ----------- USER INPUT -----------
 choice = input(tri("\n[?] Select an option: "))
