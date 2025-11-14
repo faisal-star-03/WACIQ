@@ -89,35 +89,62 @@ for ua in range(10000):
 	h='Mobile Safari/537.36'
 	alhhaj=(f"{a} {b}; {c}{d}.{e}.{f}.{g} {h}")
 	ugen.append(alhhaj)
-import os, time, sys
+import os, sys, time, random, shutil
 
-# ⚡ FLASHING EFFECT FUNCTION
-def flash_effect(text, flashes=6, delay=0.12):
-    for i in range(flashes):
-        sys.stdout.write("\033[1;93m" + text + "\033[0m\r")
-        sys.stdout.flush()
-        time.sleep(delay)
+# -------------------------------
+# 🔗 Open Telegram Link
+# -------------------------------
+os.system("xdg-open https://t.me/JAVA_SCIPT_KING")
 
-        sys.stdout.write("\033[1;30m" + text + "\033[0m\r")
-        sys.stdout.flush()
-        time.sleep(delay)
-
-    print("\033[1;92m" + text + "\033[0m")
-
-# ⚡ LOGO TEXT
-logo = r"""
+# -------------------------------
+# 🔥 LOGO
+# -------------------------------
+logo = """\033[1;31m
 ██╗    ██╗ █████╗  ██████╗██╗ ██████╗ 
 ██║    ██║██╔══██╗██╔════╝██║██╔═══██╗
 ██║ █╗ ██║███████║██║     ██║██║   ██║
 ██║███╗██║██╔══██║██║     ██║██║   ██║
 ╚███╔███╔╝██║  ██║╚██████╗██║╚██████╔╝
  ╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝╚═╝ ╚═════╝
-"""
+\033[0m"""
 
-# ⚡ CLEAR + SHOW FLASH
+# -------------------------------
+# ⚡ Lightning Effect
+# -------------------------------
+def lightning_effect(duration=2, width=60):
+    chars = [' ', '.', '*', '^', '⚡']
+    end_time = time.time() + duration
+    while time.time() < end_time:
+        line = ''.join(random.choice(chars) for _ in range(width))
+        sys.stdout.write("\r" + line)
+        sys.stdout.flush()
+        time.sleep(0.05)
+    sys.stdout.write("\r" + " " * width + "\r")
+
+# -------------------------------
+# 🟥 B-STYLE BOX MENU
+# -------------------------------
+def menu():
+    print("\033[1;31m" + logo)
+    print("\033[1;32m")
+    print("╔══════════════════════════════╗")
+    print("║   [1] Facebook Cloner        ║")
+    print("║   [2] Gmail Bruteforce       ║")
+    print("║   [3] WhatsApp Bomber        ║")
+    print("║   [4] Instagram Phishing     ║")
+    print("║   [0] Exit                   ║")
+    print("╚══════════════════════════════╝\033[0m")
+
+# -------------------------------
+# ▶ Main
+# -------------------------------
 os.system("clear")
-flash_effect(logo, flashes=8, delay=0.08)
+lightning_effect()
+menu()
 
+choice = input("\n\033[1;33m[?] Select an option: \033[0m")
+
+print(f"\n\033[1;36m[✓] You selected option {choice}\033[0m") 
 print("\033[1;32m[✓] Logo Loaded Successfully!\033[0m\n") 
 print("\033[1;31m     ┏━━━━━━━━━━━━━━━━━━━\033[1;32m BCS \033[1;31m━━━━━━━━━━━━━━━━━━━━━┓") 
 print("\033[1;31m     ┃ \033[1;35m❣︎☔︎ \033[1;36m𝙉𝘼𝙈𝙀         \033[1;31m: \033[1;33m[★] JABER\033[1;31m                ┃")
