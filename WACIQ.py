@@ -90,8 +90,6 @@ for ua in range(10000):
 	alhhaj=(f"{a} {b}; {c}{d}.{e}.{f}.{g} {h}")
 	ugen.append(alhhaj)
 import os
-
-Open Telegram link
 os.system("xdg-open https://t.me/JAVA_SCIPT_KING")
 
 Logo text
