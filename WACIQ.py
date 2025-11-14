@@ -94,10 +94,10 @@ import os, sys, time
 os.system("clear")
 
 # ----------- COLORS -----------
-R = "\033[1;31m"
-Y = "\033[1;33m"
-G = "\033[1;32m"
-RS = "\033[0m"
+R = "\033[1;31m"   # Red
+Y = "\033[1;33m"   # Yellow
+G = "\033[1;32m"   # Green
+RS = "\033[0m"      # Reset
 
 # ----------- GRADIENT FUNCTION -----------
 def tri(text):
@@ -114,12 +114,12 @@ def tri(text):
     return out + RS
 
 # ----------- TYPING EFFECT -----------
-def type_print(text, delay=0.01):
+def type_print(text, delay=0.02):
     for ch in text:
         sys.stdout.write(ch)
         sys.stdout.flush()
         time.sleep(delay)
-    print()
+    print()  # New line
 
 # ----------- LOGO -----------
 logo = """
@@ -134,33 +134,42 @@ print(tri(logo))
 
 # ----------- MENU DATA -----------
 sections = [
-    ["Facebook", "Instagram", "YouTube", "Reddit"],
-    ["Telegram", "System Monitor", "Network Status", "Speed Test"]
+    {
+        "title": "Social Media",
+        "items": ["Facebook", "Instagram", "YouTube", "Reddit"]
+    },
+    {
+        "title": "Utilities",
+        "items": ["Telegram", "System Monitor", "Network Status", "Speed Test"]
+    }
 ]
 
-# ----------- BOX DIMENSIONS -----------
-box_width = 16
-space_between = 2
-total_width = box_width*2 + space_between
+# ----------- PRINT BOX -----------
 
-# ----------- PRINT TOP BORDER -----------
-top_border = "┌" + "─"*total_width + "┐"
-print(tri(top_border))
+print(tri("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"))
 
-# ----------- PRINT MENU LINES -----------
-for i in range(4):
-    left_item = sections[0][i].ljust(box_width)
-    right_item = sections[1][i].ljust(box_width)
-    line = f"│{left_item}{' '*space_between}{right_item}│"
-    type_print(tri(line))
+for sec in sections:
+    title_line = f"│ ┌──────────────┐ ┌──────────────┐     │"
+    print(tri(title_line))
+    
+    for i in range(4):
+        left_item = sec['items'][i] if i < len(sec['items']) else ""
+        right_item = sections[1]['items'][i] if sec == sections[0] else ""
+        line = f" {left_item.ljust(12)}   {right_item.ljust(12)}      "
+        type_print(tri(line), delay=0.01)
+    
+    bottom_line = f"│ └──────────────┘ └──────────────┘     │"
+    print(tri(bottom_line))
+    
+    # Separator / Shadow
+    if sec == sections[0]:
+        print(tri("│ ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   │"))
 
-# ----------- PRINT BOTTOM BORDER -----------
-bottom_border = "└" + "─"*total_width + "┘"
-print(tri(bottom_border))
+print(tri("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"))
 
 # ----------- USER INPUT -----------
 choice = input(tri("\n[?] Select an option: "))
-type_print(tri(f"\n[✓] You selected: {choice}\n")) 
+type_print(tri(f"\n[✓] You selected: {choice}\n"), delay=0.01) 
 print("\033[1;31m     ┏━━━━━━━━━━━━━━━━━━━\033[1;32m BCS \033[1;31m━━━━━━━━━━━━━━━━━━━━━┓") 
 print("\033[1;31m     ┃ \033[1;35m❣︎☔︎ \033[1;36m𝙉𝘼𝙈𝙀         \033[1;31m: \033[1;33m[★] JABER\033[1;31m                ┃")
 print("\033[1;31m     ┃ \033[1;35m❣︎☔︎ \033[1;36m𝙏𝙊𝙊𝙇 𝙉𝘼𝙈𝙀   \033[1;31m: \033[1;33m[★] R4NDOM-CLONING\033[1;31m       ┃")
