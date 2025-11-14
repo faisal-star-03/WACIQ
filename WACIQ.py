@@ -127,6 +127,7 @@ logo = """
 ╚███╔███╔╝██║  ██║╚██████╗██║╚██████╔╝
  ╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝╚═╝ ╚═════╝ 
 """
+
 print(tri(logo))
 time.sleep(0.2)
 
@@ -134,65 +135,85 @@ time.sleep(0.2)
 sections = [
     {
         "title": "Social Media",
-        "left": ["Facebook","WhatsApp","TikTok","YouTube","Messenger","LinkedIn","Viber","Likee"],
-        "right":["Instagram","Snapchat","Reddit","Twitter/X","Pinterest","Tumblr","Discord","Telegram"]
+        "left": [
+            "Facebook","WhatsApp","TikTok","YouTube",
+            "Messenger","LinkedIn","Viber","Likee"
+        ],
+        "right": [
+            "Instagram","Snapchat","Reddit","Twitter/X",
+            "Pinterest","Tumblr","Discord","Telegram"
+        ]
     },
     {
         "title": "Camera Tools",
-        "left": ["Front Camera","Flash Test","HD Recorder","Panorama","Video Editor","Gallery Cleaner","Beauty Camera","Screen Recorder"],
-        "right":["Back Camera","Night Mode","Slow Motion","Portrait Mode","Photo Editor","Filter Lab","Stabilizer","Screenshot Tool"]
+        "left": [
+            "Front Camera","Flash Test","HD Recorder","Panorama",
+            "Video Editor","Gallery Cleaner","Beauty Camera","Screen Recorder"
+        ],
+        "right": [
+            "Back Camera","Night Mode","Slow Motion","Portrait Mode",
+            "Photo Editor","Filter Lab","Stabilizer","Screenshot Tool"
+        ]
     },
     {
         "title": "Utilities",
-        "left":["System Monitor","Storage Manager","CPU Info","App Manager","File Manager","QR Scanner","Notes","Clock/Timer"],
-        "right":["Battery Health","Phone Cleaner","GPU Info","RAM Booster","Clipboard History","Barcode Reader","Calculator","Alarm Tools"]
+        "left": [
+            "System Monitor","Storage Manager","CPU Info","App Manager",
+            "File Manager","QR Scanner","Notes","Clock/Timer"
+        ],
+        "right": [
+            "Battery Health","Phone Cleaner","GPU Info","RAM Booster",
+            "Clipboard History","Barcode Reader","Calculator","Alarm Tools"
+        ]
     },
     {
         "title": "Network Tools",
-        "left":["WiFi Analyzer","IP Lookup","Hotspot Manager","Port Scanner","Ping Test","ARP Checker","VPN Status","Router Info"],
-        "right":["Signal Strength","MAC Viewer","Speed Test","Network Scanner","DNS Lookup","Packet Sniffer","Firewall Status","Network Logs"]
+        "left": [
+            "WiFi Analyzer","IP Lookup","Hotspot Manager","Port Scanner",
+            "Ping Test","ARP Checker","VPN Status","Router Info"
+        ],
+        "right": [
+            "Signal Strength","MAC Viewer","Speed Test","Network Scanner",
+            "DNS Lookup","Packet Sniffer","Firewall Status","Network Logs"
+        ]
     },
 ]
 
 # ---------- BOX SETUP ----------
-box_width = 28
+box_width = 20
 space = 3
-total = box_width*2 + space + 1  # total width inside box
+total = box_width*2 + space + 1   # +1 for middle │
 
-# Terminal width (adjust if smaller screen)
-term_width = 80
-
-# Center the top border
+# ---------- TOP BORDER ----------
 top = "▒" * (total + 2)
-top_centered = top.center(term_width)
-print(diagonal(top_centered))
+print(tri(top))
 
 # ---------- RENDER SECTIONS ----------
 for sec in sections:
 
-    # Section Title (centered inside box)
+    # Title Bar
     title = f"▒{sec['title'].center(total)}▒"
-    print(diagonal(title.center(term_width)))
+    print(tri(title))
 
     # Top line inside section
-    print(diagonal(("▒" + "─" * total + "▒").center(term_width)))
+    print(tri("▒" + "─"*total + "▒"))
 
-    # 8+8 Menu items
+    # 8+8 Items
     for i in range(8):
-        left_item = f"➤ 〔{i+1}〕 {sec['left'][i]}".ljust(box_width)
-        right_item = f"➤ 〔{i+1}〕 {sec['right'][i]}".ljust(box_width)
-        line = f"▒{diagonal(left_item, i)}│{diagonal(right_item, i+1)}▒"
-        type_print(line.center(term_width), delay=0.004)
+        L = sec['left'][i].ljust(box_width)
+        Rg = sec['right'][i].ljust(box_width)
+        line = f"▒{L}│{Rg}▒"
+        type_print(tri(line), delay=0.004)
 
     # Bottom line
-    print(diagonal(("▒" + "─" * total + "▒").center(term_width)))
+    print(tri("▒" + "─"*total + "▒"))
 
-    # Shadow / separator
+    # Shadow (except last)
     if sec != sections[-1]:
-        print(diagonal(("▒" + "░" * total + "▒").center(term_width)))
+        print(tri("▒" + "░"*total + "▒"))
 
-# Bottom border
-print(diagonal(top.center(term_width))) 
+# ---------- FINAL BOTTOM ----------
+print(tri(top))
 
 # ---------- INPUT ----------
 choice = input(tri("\n[?] Select an option: "))
