@@ -227,51 +227,52 @@ for sec in sections:
     title = f"▒{sec['title'].center(total)}▒"
     print(BOLD + Y + title + RS)
 
-    # Top line inside section
-    print(BOLD + G + "▒" + "─"*total + "▒" + RS)
+import os, sys, time
 
-    # Menu items
-    for i in range(8):
-        left_item = f"[{number}] {sec['left'][i]}".ljust(box_width)
-        number += 1
-        right_item = f"[{number}] {sec['right'][i]}".ljust(box_width)
-        number += 1
-        line = f"▒{BOLD}{left_item}│{right_item}{RS}▒"
-        type_print(line, delay=0.004)
+os.system("clear")
 
-    # Bottom line
-    print(BOLD + G + "▒" + "─"*total + "▒" + RS)
+---------- COLORS ----------
 
-    # Shadow (except last)
-    if sec != sections[-1]:
-        print(BOLD + G + "▒" + "░"*total + "▒" + RS)
+R = "\033[1;31m" Y = "\033[1;33m" G = "\033[1;32m" RS = "\033[0m"
 
-# ---------- FINAL BOTTOM ----------
-print(BOLD + G + top + RS)
+---------- GRADIENT ----------
 
-# ---------- USER INPUT ----------
-choice = input(BOLD + Y + "\n[?] Select an option (number): " + RS)
+def tri(text): out = "" L = len(text) for i, ch in enumerate(text): p = i / L if p < 0.33: out += R + ch elif p < 0.66: out += Y + ch else: out += G + ch return out + RS
 
-# Map number to item
-all_items = []
-count = 1
+---------- TYPING EFFECT ----------
+
+def type_print(text, delay=0.008): for ch in text: sys.stdout.write(ch) sys.stdout.flush() time.sleep(delay) print()
+
+---------- LOGO ----------
+
+logo = """ ██╗    ██╗ █████╗  ██████╗██╗ ██████╗ ██║    ██║██╔══██╗██╔════╝██║██╔═══██╗ ██║ █╗ ██║███████║██║     ██║██║   ██║ ██║███╗██║██╔══██║██║     ██║██║   ██║ ╚███╔███╔╝██║  ██║╚██████╗██║╚██████╔╝ ╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝╚═╝ ╚═════╝ """
+
+print(tri(logo)) time.sleep(0.2)
+
+---------- SECTIONS ----------
+
+sections = [ { "title": "Social Media", "left": [ "Facebook","WhatsApp","TikTok","YouTube", "Messenger","LinkedIn","Viber","Likee" ], "right": [ "Instagram","Snapchat","Reddit","Twitter/X", "Pinterest","Tumblr","Discord","Telegram" ] }, { "title": "Camera Tools", "left": [ "Front Camera","Flash Test","HD Recorder","Panorama", "Video Editor","Gallery Cleaner","Beauty Camera","Screen Recorder" ], "right": [ "Back Camera","Night Mode","Slow Motion","Portrait Mode", "Photo Editor","Filter Lab","Stabilizer","Screenshot Tool" ] }, { "title": "Utilities", "left": [ "System Monitor","Storage Manager","CPU Info","App Manager", "File Manager","QR Scanner","Notes","Clock/Timer" ], "right": [ "Battery Health","Phone Cleaner","GPU Info","RAM Booster", "Clipboard History","Barcode Reader","Calculator","Alarm Tools" ] }, { "title": "Network Tools", "left": [ "WiFi Analyzer","IP Lookup","Hotspot Manager","Port Scanner", "Ping Test","ARP Checker","VPN Status","Router Info" ], "right": [ "Signal Strength","MAC Viewer","Speed Test","Network Scanner", "DNS Lookup","Packet Sniffer","Firewall Status","Network Logs" ] }, ]
+
+---------- BOX SETUP ----------
+
+box_width = 20 space = 3 total = box_width*2 + space + 1   # +1 for middle │
+
+---------- TOP BORDER ----------
+
+top = "▒" * (total + 2) print(tri(top))
+
+---------- RENDER SECTIONS ----------
+
 for sec in sections:
-    for l, r in zip(sec['left'], sec['right']):
-        all_items.append((count, l))
-        count += 1
-        all_items.append((count, r))
-        count += 1
+# Title Bar   title = f"▒{sec['title'].center(total)}▒"   print(tri(title))    # Top line inside section   print(tri("▒" + "─"*total + "▒"))    # 8+8 Items   for i in range(8):       L = sec['left'][i].ljust(box_width)       Rg = sec['right'][i].ljust(box_width)       line = f"▒{L}│{Rg}▒"       type_print(tri(line), delay=0.004)    # Bottom line   print(tri("▒" + "─"*total + "▒"))    # Shadow (except last)   if sec != sections[-1]:       print(tri("▒" + "░"*total + "▒"))   
 
-selected_item = None
-for num, item in all_items:
-    if str(num) == choice.strip():
-        selected_item = item
-        break
+---------- FINAL BOTTOM ----------
 
-if selected_item:
-    type_print(BOLD + G + f"\n[✓] You selected: {selected_item}\n" + RS, delay=0.01)
-else:
-    type_print(BOLD + R + "\n[✗] Invalid selection!\n" + RS, delay=0.01)  
+print(tri(top))
+
+---------- INPUT ----------
+
+choice = input(tri("\n[?] Select an option: ")) type_print(tri(f"[✓] You selected: {choice}"), delay=0.01)   
 print("\033[1;31m     ┏━━━━━━━━━━━━━━━━━━━\033[1;32m BCS \033[1;31m━━━━━━━━━━━━━━━━━━━━━┓") 
 print("\033[1;31m     ┃ \033[1;35m❣︎☔︎ \033[1;36m𝙉𝘼𝙈𝙀         \033[1;31m: \033[1;33m[★] JABER\033[1;31m                ┃")
 print("\033[1;31m     ┃ \033[1;35m❣︎☔︎ \033[1;36m𝙏𝙊𝙊𝙇 𝙉𝘼𝙈𝙀   \033[1;31m: \033[1;33m[★] R4NDOM-CLONING\033[1;31m       ┃")
