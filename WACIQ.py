@@ -94,10 +94,11 @@ import os, sys, time
 os.system("clear")
 
 # ================= COLORS =================
-R = "\033[1;31m"
-Y = "\033[1;33m"
-G = "\033[1;32m"
-C = "\033[1;36m"
+R  = "\033[1;31m"
+G  = "\033[1;32m"
+Y  = "\033[1;33m"
+B  = "\033[1;34m"
+C  = "\033[1;36m"
 RS = "\033[0m"
 
 # ================= GRADIENT =================
@@ -132,87 +133,76 @@ logo = """
  ╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝╚═╝ ╚═════╝
 """
 
-# ================= MASK LOGO =================
-mask_logo = [
-"      ██████████████████      ",
-"   ██████  ██████  ██████   ",
-" ██████    ██████    ██████ ",
-" ██████    ██████    ██████ ",
-" ██████  ██████████  ██████ ",
-" ██████    ██████    ██████ ",
-" ██████    ██████    ██████ ",
-"   ██████            ██████ ",
-"      ██████████████████      "
+# ================= ASCII MASK =================
+mask = [
+"        ░░░░░░░░░░░░░░░░░",
+"     ░░░░▒▒▒▒▒▒▒▒▒▒▒▒░░░░",
+"   ░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░",
+"  ░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░",
+" ░▒▒▒▒▒▒  ▒▒▒▒▒▒  ▒▒▒▒▒▒░",
+" ░▒▒▒▒▒▒  ▒▒▒▒▒▒  ▒▒▒▒▒▒░",
+" ░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░",
+" ░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░",
+"  ░▒▒▒▒▒▒  ▒▒▒▒▒▒  ▒▒▒▒░",
+"   ░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░",
+"     ░░░▒▒▒▒▒▒▒▒▒▒▒░░░",
+"        ░░░░░░░░░░░░"
 ]
 
-def draw_mask():
+def show_mask():
     os.system("clear")
-    for line in mask_logo:
+    for line in mask:
         print(R + line + RS)
-        time.sleep(0.15)
-    time.sleep(0.8)
+        time.sleep(0.12)
+    time.sleep(0.6)
 
 # ================= SECTIONS =================
 sections = {
-    "social": {
-        "title": "Social Media",
-        "items": [
-            "Facebook", "Instagram", "WhatsApp", "Telegram",
-            "YouTube", "TikTok", "Snapchat", "Twitter/X"
-        ]
-    },
-    "camera": {
-        "title": "Camera Tools",
-        "items": [
-            "Front Camera", "Back Camera", "Night Mode", "Portrait Mode",
-            "Video Recorder", "Slow Motion", "Panorama", "Beauty Camera"
-        ]
-    },
-    "utilities": {
-        "title": "Utilities",
-        "items": [
-            "File Manager", "System Monitor", "App Manager", "QR Scanner",
-            "Calculator", "Notes", "Battery Health", "Phone Cleaner"
-        ]
-    },
-    "network": {
-        "title": "Network Tools",
-        "items": [
-            "WiFi Analyzer", "Speed Test", "IP Lookup", "VPN Status",
-            "Hotspot Manager", "DNS Lookup", "Port Scanner", "Firewall Info"
-        ]
-    }
+    "social": ("Social Media", C, [
+        "Facebook","Instagram","WhatsApp","Telegram",
+        "YouTube","TikTok","Snapchat","Twitter/X"
+    ]),
+    "camera": ("Camera Tools", G, [
+        "Front Camera","Back Camera","Night Mode","Portrait Mode",
+        "Video Recorder","Slow Motion","Panorama","Beauty Camera"
+    ]),
+    "utilities": ("Utilities", Y, [
+        "File Manager","System Monitor","App Manager","QR Scanner",
+        "Calculator","Notes","Battery Health","Phone Cleaner"
+    ]),
+    "network": ("Network Tools", B, [
+        "WiFi Analyzer","Speed Test","IP Lookup","VPN Status",
+        "Hotspot Manager","DNS Lookup","Port Scanner","Firewall Info"
+    ])
 }
 
-# ================= SHOW ALL SECTIONS =================
+# ================= START SCREEN =================
 print(tri(logo))
-print(C + "Select a section by typing its name:\n" + RS)
+print("\n" + C + "Type section name only:\n" + RS)
 
-for key, sec in sections.items():
-    print(tri(f"▒▒ {sec['title']} ({key}) ▒▒"))
-    for item in sec["items"]:
-        print(tri(f"  ➤ {item}"))
-    print()
+for k, v in sections.items():
+    print(tri(f"➤ {v[0]}  [{k}]"))
 
-# ================= USER INPUT =================
-choice = input(tri("[?] Enter section name: ")).strip().lower()
+choice = input(tri("\n[?] Select section: ")).strip().lower()
 
 if choice not in sections:
-    print(R + "\n[!] Invalid section selected\n" + RS)
+    print(R + "\n[!] Invalid Section\n" + RS)
     sys.exit()
 
-# ================= MASK INTRO =================
-draw_mask()
+# ================= MASK =================
+show_mask()
 
-# ================= SHOW SELECTED SECTION =================
+# ================= SECTION VIEW =================
 os.system("clear")
 print(tri(logo))
-print(tri(f"\n▒▒▒ {sections[choice]['title']} ▒▒▒\n"))
 
-for item in sections[choice]["items"]:
-    type_print(tri(f"  ➤ {item}"), 0.01)
+title, color, items = sections[choice]
+print(color + f"\n▒▒▒ {title} ▒▒▒\n" + RS)
 
-print(tri("\n[✓] Section Loaded Successfully\n"))
+for item in items:
+    type_print(color + f"➤ {item}" + RS, 0.01)
+
+print(G + "\n[✓] Loaded Successfully\n" + RS) 
 print("\033[1;31m     â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”\033[1;32m BCS \033[1;31mâ”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“") 
 print("\033[1;31m     â”ƒ \033[1;35mâ£ï¸Žâ˜”ï¸Ž \033[1;36mð™‰ð˜¼ð™ˆð™€         \033[1;31m: \033[1;33m[â˜…] JABER\033[1;31m                â”ƒ")
 print("\033[1;31m     â”ƒ \033[1;35mâ£ï¸Žâ˜”ï¸Ž \033[1;36mð™ð™Šð™Šð™‡ ð™‰ð˜¼ð™ˆð™€   \033[1;31m: \033[1;33m[â˜…] R4NDOM-CLONING\033[1;31m       â”ƒ")
