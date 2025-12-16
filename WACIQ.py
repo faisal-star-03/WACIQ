@@ -119,8 +119,8 @@ def type_print(text, delay=0.006):
         time.sleep(delay)
     print()
 
-# ---------- LOGO ----------
-logo = """
+# ---------- LOGOS ----------
+logo_main = """
 ██╗    ██╗ █████╗  ██████╗██╗ ██████╗
 ██║    ██║██╔══██╗██╔════╝██║██╔═══██╗
 ██║ █╗ ██║███████║██║     ██║██║   ██║
@@ -129,25 +129,36 @@ logo = """
  ╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝╚═╝ ╚═════╝
 """
 
-# ---------- SECTIONS ----------
+logo_secondary = """
+ ██████╗ ██████╗ ███╗   ███╗███████╗
+██╔════╝██╔═══██╗████╗ ████║██╔════╝
+██║     ██║   ██║██╔████╔██║█████╗  
+██║     ██║   ██║██║╚██╔╝██║██╔══╝  
+╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗
+ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝
+"""
+
+# ---------- SECTIONS WITH ITEMS ----------
 sections = {
-    "social": [
+    "Social Media": [
         "Facebook","WhatsApp","TikTok","YouTube",
-        "Messenger","LinkedIn","Viber","Likee"
+        "Messenger","LinkedIn","Viber","Likee",
+        "Instagram","Snapchat","Reddit","Twitter/X",
+        "Pinterest","Tumblr","Discord","Telegram"
     ],
-    "camera": [
+    "Camera Tools": [
         "Front Camera","Flash Test","HD Recorder","Panorama",
         "Video Editor","Gallery Cleaner","Beauty Camera","Screen Recorder",
         "Back Camera","Night Mode","Slow Motion","Portrait Mode",
         "Photo Editor","Filter Lab","Stabilizer","Screenshot Tool"
     ],
-    "utilities": [
+    "Utilities": [
         "System Monitor","Storage Manager","CPU Info","App Manager",
         "File Manager","QR Scanner","Notes","Clock/Timer",
         "Battery Health","Phone Cleaner","GPU Info","RAM Booster",
         "Clipboard History","Barcode Reader","Calculator","Alarm Tools"
     ],
-    "network": [
+    "Network Tools": [
         "WiFi Analyzer","IP Lookup","Hotspot Manager","Port Scanner",
         "Ping Test","ARP Checker","VPN Status","Router Info",
         "Signal Strength","MAC Viewer","Speed Test","Network Scanner",
@@ -161,13 +172,14 @@ space = 3
 total = box_width * 2 + space + 1
 top = "▒" * (total + 2)
 
-# ---------- FUNCTION TO DISPLAY SECTION ----------
-def display_section(title, items):
+# ---------- FUNCTION TO DISPLAY A SECTION ----------
+def display_section(title, items, logo=logo_main):
     os.system("clear")
     print(tri(logo))
     print(tri(f"▒{title.center(total)}▒"))
     print(tri("▒" + "─" * total + "▒"))
     
+    # دوه ستنه چاپول
     for i in range(8):
         left = items[i].ljust(box_width)
         right = items[i+8].ljust(box_width)
@@ -178,20 +190,23 @@ def display_section(title, items):
     print(tri(top))
 
 # ---------- MAIN ----------
-os.system("clear")
-print(tri(logo))
 
-print(tri("\nAvailable sections: Social, Camera, Utilities, Network"))
+os.system("clear")
+print(tri(logo_main))
+
+# په شروع کې ټول سیکشنونه د مینیو ایټمونو سره ښودل
+for sec_name, items in sections.items():
+    display_section(sec_name, items)
+
+# د کارونکي انتخاب
 choice = input(tri("\n[?] Select a section: ")).strip().lower()
 
-if "social" in choice:
-    display_section("Social Media", sections["social"])
-elif "camera" in choice:
-    display_section("Camera Tools", sections["camera"])
-elif "utilities" in choice:
-    display_section("Utilities", sections["utilities"])
-elif "network" in choice:
-    display_section("Network Tools", sections["network"])
+# انتخاب شوی سیکشن د لوگو ثانوي ډیزاین سره ښودل
+for sec_name, items in sections.items():
+    if sec_name.lower().startswith(choice):
+        display_section(sec_name, items, logo=logo_secondary)
+        type_print(tri(f"[✓] You selected: {sec_name}"), delay=0.01)
+        break
 else:
     type_print(tri("[✗] Invalid selection!")) 
 print("\033[1;31m     ┏━━━━━━━━━━━━━━━━━━━\033[1;32m BCS \033[1;31m━━━━━━━━━━━━━━━━━━━━━┓") 
