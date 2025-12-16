@@ -105,7 +105,7 @@ def tri(text):
     out = ""
     L = len(text)
     for i, ch in enumerate(text):
-        p = i / L
+        p = i / max(L-1,1)
         if p < 0.33:
             out += R + ch
         elif p < 0.66:
@@ -129,22 +129,24 @@ logo_main = """
 ██║ █╗ ██║███████║██║     ██║██║   ██║
 ██║███╗██║██╔══██║██║     ██║██║   ██║
 ╚███╔███╔╝██║  ██║╚██████╗██║╚██████╔╝
- ╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝╚═╝ ╚═════╝
+ ╚══╝╚══╝ ╚═╝  ╚═════╝╚═╝ ╚═════╝
 """
 
 logo_secondary = """
- ██╗    ██╗ █████╗ ███████╗██╗ ██████╗
-██║    ██║██╔══██╗██╔════╝██║██╔═══██╗
-██║ █╗ ██║███████║███████╗██║██║   ██║
-██║███╗██║██╔══██║╚════██║██║██║   ██║
-╚███╔███╔╝██║  ██║███████║██║╚██████╔╝
- ╚══╝╚══╝ ╚═╝  ╚═╝╚══════╝╚═╝ ╚═════╝ 
+ ██████╗ ██████╗ ███╗   ███╗███████╗
+██╔════╝██╔═══██╗████╗ ████║██╔════╝
+██║     ██║   ██║██╔████╔██║█████╗  
+██║     ██║   ██║██║╚██╔╝██║██╔══╝  
+╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗
+ ╚═════╝╚═════╝ ╚═╝     ╚═╝╚══════╝
 """
 
-# ================= ASCII MESSAGE =================
-ascii_message = """
-you know about me
-WASIQ KING the legend of AFG
+ascii_message = r"""
+__        __   _                            _    _ _       _ 
+\ \      / /__| | ___ ___  _ __ ___   ___  | |  | (_) __ _| |
+ \ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \ | |  | | |/ _` | |
+  \ V  V /  __/ | (_| (_) | | | | | |  __/ | |__| | | (_| | |
+   \_/\_/ \___|_|\___\___/|_| |_| |_|\___|  \____/|_|\__,_|_|
 """
 
 # ================= SECTIONS AND ITEMS =================
@@ -186,11 +188,13 @@ def tri_line(total):
 # ================= DISPLAY ALL SECTIONS (FIRST TIME) =================
 def display_all_sections():
     os.system("clear")
-    type_print(logo_main, delay=0.002)
+    type_print(tri(logo_main), delay=0.002)  # gradient لوگو
     print()
-    for idx, (name, items) in enumerate(sections.items()):
-        type_print(tri(f"▒{name.center(total)}▒"), delay=0.01)
+    for name, items in sections.items():
+        # gradient سیکشن header
+        type_print(tri(f"▒ {name.center(total-2)} ▒"), delay=0.01)
         print(tri_line(total))
+        # دوه ستنه ایټمونه gradient
         for i in range(8):
             left = items[i].ljust(box_width)
             right = items[i+8].ljust(box_width)
@@ -227,7 +231,7 @@ choice = input("\n[?] Select a section: ").strip().lower()
 
 for name in sections.keys():
     if name.lower().startswith(choice):
-        display_ascii_message()  # ASCII art مخکې له سیکشن
+        display_ascii_message()  # fancy ASCII مخکې له سیکشن
         display_selected_section(name, sections[name])
         type_print(f"[✓] You selected: {name}", delay=0.01)
         break
