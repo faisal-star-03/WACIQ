@@ -91,16 +91,13 @@ for ua in range(10000):
 	ugen.append(alhhaj)
 import os, sys, time
 
-# ---------- پاکول ----------
-os.system("clear")
+# ---------- COLORS ----------
+R  = "\033[1;31m"   # Red
+Y  = "\033[1;33m"   # Yellow
+G  = "\033[1;32m"   # Green
+RS = "\033[0m"      # Reset
 
-# ---------- رنګونه ----------
-R  = "\033[1;31m"   # سور
-Y  = "\033[1;33m"   # ژیړ
-G  = "\033[1;32m"   # شین
-RS = "\033[0m"      # بیا تنظیمول
-
-# ---------- گرادیینټ تابع ----------
+# ---------- GRADIENT ----------
 def tri(text):
     out = ""
     L = len(text)
@@ -114,7 +111,7 @@ def tri(text):
             out += G + ch
     return out + RS
 
-# ---------- د تایپ افکت تابع ----------
+# ---------- TYPING EFFECT ----------
 def type_print(text, delay=0.006):
     for ch in text:
         sys.stdout.write(ch)
@@ -122,98 +119,81 @@ def type_print(text, delay=0.006):
         time.sleep(delay)
     print()
 
-# ---------- لوگو ----------
+# ---------- LOGO ----------
 logo = """
-██╗    ██╗ █████╗ ███████╗██╗ ██████╗
+██╗    ██╗ █████╗  ██████╗██╗ ██████╗
 ██║    ██║██╔══██╗██╔════╝██║██╔═══██╗
-██║ █╗ ██║███████║███████╗██║██║   ██║
-██║███╗██║██╔══██║╚════██║██║██║   ██║
-╚███╔███╔╝██║  ██║███████║██║╚██████╔╝
- ╚══╝╚══╝ ╚═╝  ╚═╝╚══════╝╚═╝ ╚═════╝
+██║ █╗ ██║███████║██║     ██║██║   ██║
+██║███╗██║██╔══██║██║     ██║██║   ██║
+╚███╔███╔╝██║  ██║╚██████╗██║╚██████╔╝
+ ╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝╚═╝ ╚═════╝
 """
-print(tri(logo))
-time.sleep(0.2)
 
-# ================= ASCII ماسک =================
-mask = [
-"████████████████████████████████████████",
-"████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒████",
-"████▒▒  ▒▒▒▒▒▒   ▒▒▒▒▒▒   ▒▒▒▒▒▒  ▒▒████",
-"████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒████",
-"████▒▒   O   O   ▒▒▒▒▒▒▒▒▒▒   ^   ^   ▒▒████",
-"████▒▒    '-'    ▒▒▒▒▒▒▒▒▒▒    '-'    ▒▒████",
-"████████████████████████████████████████"
-]
-
-def show_mask():
-    os.system("clear")
-    for line in mask:
-        print(R + line + RS)
-        time.sleep(0.12)
-    time.sleep(0.6) 
-
-# ---------- برخې ----------
+# ---------- SECTIONS ----------
 sections = {
-    "social media": {
-        "items": [
-            "Facebook","WhatsApp","TikTok","YouTube",
-            "Messenger","LinkedIn","Viber","Likee",
-            "Instagram","Snapchat","Reddit","Twitter/X",
-            "Pinterest","Tumblr","Discord","Telegram"
-        ]
-    },
-    "camera tools": {
-        "items": [
-            "Front Camera","Flash Test","HD Recorder","Panorama",
-            "Video Editor","Gallery Cleaner","Beauty Camera","Screen Recorder",
-            "Back Camera","Night Mode","Slow Motion","Portrait Mode",
-            "Photo Editor","Filter Lab","Stabilizer","Screenshot Tool"
-        ]
-    },
-    "utilities": {
-        "items": [
-            "System Monitor","Storage Manager","CPU Info","App Manager",
-            "File Manager","QR Scanner","Notes","Clock/Timer",
-            "Battery Health","Phone Cleaner","GPU Info","RAM Booster",
-            "Clipboard History","Barcode Reader","Calculator","Alarm Tools"
-        ]
-    },
-    "network tools": {
-        "items": [
-            "WiFi Analyzer","IP Lookup","Hotspot Manager","Port Scanner",
-            "Ping Test","ARP Checker","VPN Status","Router Info",
-            "Signal Strength","MAC Viewer","Speed Test","Network Scanner",
-            "DNS Lookup","Packet Sniffer","Firewall Status","Network Logs"
-        ]
-    }
+    "social": [
+        "Facebook","WhatsApp","TikTok","YouTube",
+        "Messenger","LinkedIn","Viber","Likee"
+    ],
+    "camera": [
+        "Front Camera","Flash Test","HD Recorder","Panorama",
+        "Video Editor","Gallery Cleaner","Beauty Camera","Screen Recorder",
+        "Back Camera","Night Mode","Slow Motion","Portrait Mode",
+        "Photo Editor","Filter Lab","Stabilizer","Screenshot Tool"
+    ],
+    "utilities": [
+        "System Monitor","Storage Manager","CPU Info","App Manager",
+        "File Manager","QR Scanner","Notes","Clock/Timer",
+        "Battery Health","Phone Cleaner","GPU Info","RAM Booster",
+        "Clipboard History","Barcode Reader","Calculator","Alarm Tools"
+    ],
+    "network": [
+        "WiFi Analyzer","IP Lookup","Hotspot Manager","Port Scanner",
+        "Ping Test","ARP Checker","VPN Status","Router Info",
+        "Signal Strength","MAC Viewer","Speed Test","Network Scanner",
+        "DNS Lookup","Packet Sniffer","Firewall Status","Network Logs"
+    ]
 }
 
-# ---------- ماسک ښودل ----------
-show_mask()
+# ---------- BOX SETUP ----------
+box_width = 28
+space = 3
+total = box_width * 2 + space + 1
+top = "▒" * (total + 2)
 
-# ---------- برخې ښکاره کول ----------
+# ---------- FUNCTION TO DISPLAY SECTION ----------
+def display_section(title, items):
+    os.system("clear")
+    print(tri(logo))
+    print(tri(f"▒{title.center(total)}▒"))
+    print(tri("▒" + "─" * total + "▒"))
+    
+    for i in range(8):
+        left = items[i].ljust(box_width)
+        right = items[i+8].ljust(box_width)
+        line = f"▒{left}│{right}▒"
+        type_print(tri(line), delay=0.004)
+    
+    print(tri("▒" + "─" * total + "▒"))
+    print(tri(top))
+
+# ---------- MAIN ----------
 os.system("clear")
 print(tri(logo))
-print(tri("\nAvailable Sections:\n"))
-for name in sections.keys():
-    print(tri(f"  ➤ {name.title()}"))
 
-# ---------- د کارونکي انتخاب ----------
-choice = input(tri("\n[؟] د یوې برخې نوم ولیکئ: ")).strip().lower()
+print(tri("\nAvailable sections: Social, Camera, Utilities, Network"))
+choice = input(tri("\n[?] Select a section: ")).strip().lower()
 
-if choice not in sections:
-    print(R + "\n[!] غلط انتخاب\n" + RS)
-    sys.exit()
-
-# ---------- انتخاب شوې برخه ښکاره کول ----------
-os.system("clear")
-print(tri(logo))
-print(tri(f"\n▒▒▒ {choice.title()} ▒▒▒\n"))
-
-for item in sections[choice]["items"]:
-    type_print(tri(f"  ➤ {item}"), 0.01)
-
-print(tri("\n[✓] برخه بریالۍ توګه ښکاره شوه\n"))
+if "social" in choice:
+    display_section("Social Media", sections["social"])
+elif "camera" in choice:
+    display_section("Camera Tools", sections["camera"])
+elif "utilities" in choice:
+    display_section("Utilities", sections["utilities"])
+elif "network" in choice:
+    display_section("Network Tools", sections["network"])
+else:
+    type_print(tri("[✗] Invalid selection!")) 
 print("\033[1;31m     ┏━━━━━━━━━━━━━━━━━━━\033[1;32m BCS \033[1;31m━━━━━━━━━━━━━━━━━━━━━┓") 
 print("\033[1;31m     ┃ \033[1;35m❣︎☔︎ \033[1;36m𝙉𝘼𝙈𝙀         \033[1;31m: \033[1;33m[★] JABER\033[1;31m                ┃")
 print("\033[1;31m     ┃ \033[1;35m❣︎☔︎ \033[1;36m𝙏𝙊𝙊𝙇 𝙉𝘼𝙈𝙀   \033[1;31m: \033[1;33m[★] R4NDOM-CLONING\033[1;31m       ┃")
