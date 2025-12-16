@@ -176,6 +176,7 @@ sections = {
     ]
 }
 
+
 # ================= BOX SETUP =================
 box_width = 28
 total = box_width*2 + 3 + 1
@@ -194,6 +195,8 @@ def display_all_sections():
         type_print(tri("▒"), delay=0.01)
         # gradient سیکشن header
         type_print(tri(f"▒ {name.center(total-2)} ▒"), delay=0.01)
+        # لاندې ساده ▒ لین
+        type_print(tri("▒"), delay=0.01)
         # دوه ستنه ایټمونه gradient
         for i in range(8):
             left = items[i].ljust(box_width)
@@ -201,7 +204,8 @@ def display_all_sections():
             line = f"▒{left}│{right}▒"
             type_print(tri(line), delay=0.004)
         print(tri_line(total))  # د بکس پای
-    print(top) 
+    print(top)
+    
 # ================= DISPLAY ASCII MESSAGE BEFORE SECTION =================
 def display_ascii_message():
     os.system("clear")
