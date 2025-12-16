@@ -108,14 +108,14 @@ def type_print(text, delay=0.008):
         time.sleep(delay)
     print()
 
-# ---------- SECTION LOGOS ----------
+# ---------- LOGOS ----------
 logo_main = """
 ██╗    ██╗ █████╗  ██████╗██╗ ██████╗
 ██║    ██║██╔══██╗██╔════╝██║██╔═══██╗
 ██║ █╗ ██║███████║██║     ██║██║   ██║
 ██║███╗██║██╔══██║██║     ██║██║   ██║
 ╚███╔███╔╝██║  ██║╚██████╗██║╚██████╔╝
- ╚══╝╚══╝ ╚═╝  ╚═════╝╚═╝ ╚═════╝
+ ╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝╚═╝ ╚═════╝
 """
 
 logo_secondary = """
@@ -155,12 +155,8 @@ sections = {
     ]
 }
 
-section_colors = {
-    "Social Media": R,
-    "Camera Tools": Y,
-    "Utilities": G,
-    "Network Tools": C
-}
+# لومړی رنګ سکیم
+initial_colors = [R, Y, G, B]
 
 # ---------- BOX SETUP ----------
 box_width = 28
@@ -168,30 +164,38 @@ space = 3
 total = box_width * 2 + space + 1
 top = "▒" * (total + 2)
 
-# ---------- DISPLAY ONLY SECTION TITLES ----------
-def display_section_titles():
+# ---------- HELP FUNCTION ----------
+def tri_line(total):
+    return "▒" + "─" * total + "▒"
+
+# ---------- DISPLAY ALL SECTIONS WITH ITEMS (FIRST TIME) ----------
+def display_all_sections():
     os.system("clear")
     type_print(logo_main, delay=0.002)
     print()
-    for name, color in section_colors.items():
-        line = f"▒{color}{name.center(total)}{RS}▒"
-        type_print(line, delay=0.02)
+    for idx, (name, items) in enumerate(sections.items()):
+        color = initial_colors[idx % len(initial_colors)]
+        # سیکشن عنوان
+        type_print(f"▒{color}{name.center(total)}{RS}▒", delay=0.01)
+        print(tri_line(total))
+        # دوه ستنه ایټمونه
+        for i in range(8):
+            left = f"{R}{items[i].ljust(box_width)}{RS}"
+            right = f"{G}{items[i+8].ljust(box_width)}{RS}"
+            line = f"▒{left}│{right}▒"
+            type_print(line, delay=0.004)
         print(tri_line(total))
     print(top)
 
-# ---------- DISPLAY SELECTED SECTION WITH ITEMS ----------
+# ---------- DISPLAY SELECTED SECTION (SECOND TIME) ----------
 def display_selected_section(name, items):
     os.system("clear")
-    # لوگو د دویم ډیزاین سره ټایپینګ
     type_print(logo_secondary, delay=0.002)
     print(tri_line(total))
-    color = section_colors.get(name, M)
-    
-    # عنوان
-    type_print(f"▒{color}{name.center(total)}{RS}▒", delay=0.01)
+    # عنوان ساده رنګ
+    type_print(f"▒{B}{name.center(total)}{RS}▒", delay=0.01)
     print(tri_line(total))
-    
-    # ایټمونه په دوه ستنو
+    # دوه ستنه ایټمونه ساده رنګونه
     for i in range(8):
         left = f"{M}{items[i].ljust(box_width)}{RS}"
         right = f"{C}{items[i+8].ljust(box_width)}{RS}"
@@ -200,15 +204,10 @@ def display_selected_section(name, items):
     print(tri_line(total))
     print(top)
 
-# ---------- HELP FUNCTION ----------
-def tri_line(total):
-    return "▒" + "─" * total + "▒"
-
 # ---------- MAIN ----------
-display_section_titles()
+display_all_sections()
 choice = input("\n[?] Select a section: ").strip().lower()
 
-# پیدا کول او نمایش کول
 for name in sections.keys():
     if name.lower().startswith(choice):
         display_selected_section(name, sections[name])
