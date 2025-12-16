@@ -148,7 +148,6 @@ __        __   _                            _    _ _       _
   \ V  V /  __/ | (_| (_) | | | | | |  __/ | |__| | | (_| | |
    \_/\_/ \___|_|\___\___/|_| |_| |_|\___|  \____/|_|\__,_|_|
 """
-
 # ================= SECTIONS AND ITEMS =================
 sections = {
     "Social Media": [
@@ -191,18 +190,18 @@ def display_all_sections():
     type_print(tri(logo_main), delay=0.002)  # gradient لوگو
     print()
     for name, items in sections.items():
+        # د عنوان پورته ساده ▒ لین
+        type_print(tri("▒"), delay=0.01)
         # gradient سیکشن header
         type_print(tri(f"▒ {name.center(total-2)} ▒"), delay=0.01)
-        print(tri_line(total))
         # دوه ستنه ایټمونه gradient
         for i in range(8):
             left = items[i].ljust(box_width)
             right = items[i+8].ljust(box_width)
             line = f"▒{left}│{right}▒"
             type_print(tri(line), delay=0.004)
-        print(tri_line(total))
-    print(top)
-
+        print(tri_line(total))  # د بکس پای
+    print(top) 
 # ================= DISPLAY ASCII MESSAGE BEFORE SECTION =================
 def display_ascii_message():
     os.system("clear")
