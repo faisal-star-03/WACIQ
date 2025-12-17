@@ -247,11 +247,35 @@ def display_all_sections():
 # ================= ASCII MESSAGE =================
 def display_ascii_message():
     os.system("clear")
-    for line in ascii_message.splitlines():
-        type_print(f"{C}{line.center(total)}{RS}", 0.01)
-    time.sleep(1.3)
-    os.system("clear")
 
+    lines = ascii_message.strip().splitlines()
+    n = len(lines)
+
+    for i, line in enumerate(lines):
+
+        # سر – آبي
+        if i < n * 0.25:
+            colored = f"{C}{line.center(total)}{RS}"
+
+        # منځ – سور
+        elif i < n * 0.55:
+            colored = f"{R}{line.center(total)}{RS}"
+
+        # لاندې – سپین
+        elif i < n * 0.8:
+            colored = f"{RS}{line.center(total)}"
+
+        # اخر – Gradient
+        else:
+            colored = tri(line.center(total))
+
+        # ورو ټایپ افکټ
+        type_print(colored, delay=0.01)
+
+    # 🕒 زیات تم کېدل
+    time.sleep(3.5)
+
+    os.system("clear") 
 # ================= SELECTED SECTION =================
 def display_selected_section(name, items):
     type_print(logo_secondary, 0.002)
