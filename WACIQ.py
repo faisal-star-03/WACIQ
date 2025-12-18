@@ -295,8 +295,10 @@ def display_selected_section(name, data):
     items = data["items"]
     link = data["link"]
 
-    os.system(f"xdg-open '{link}'")
-    time.sleep(1)
+    os.system("clear")
+
+    # 🔹 لوګو بیا ښکاره کړه
+    type_print(tri(logo_secondary), 0.002)
 
     print("▒" * (total + 2))
     print(f"▒{B}{name.center(total)}{RS}▒")
@@ -311,6 +313,31 @@ def display_selected_section(name, data):
 
     print("▒" + "─" * total + "▒")
     print("▒" * (total + 2))
+
+    # 🔽 لاندې Menu
+    print(f"""
+{G}[01]{RS} Select Option
+{Y}[02]{RS} Join WhatsApp Group
+{R}[00]{RS} Exit
+""")
+
+    opt = input(f"{C}[?] Choose : {RS}").strip()
+
+    if opt == "1" or opt == "01":
+        print(f"{G}[✓] Option selected (demo){RS}")
+        time.sleep(1)
+
+    elif opt == "2" or opt == "02":
+        os.system(f"xdg-open '{link}'")
+        time.sleep(1)
+
+    elif opt == "0" or opt == "00":
+        print(f"{R}[!] Exit...{RS}")
+        sys.exit()
+
+    else:
+        print(f"{R}[✗] Invalid choice!{RS}")
+        time.sleep(1)
 # ================= MAIN =================
 display_all_sections()   # ✅ دا مهمه کرښه وه
 
